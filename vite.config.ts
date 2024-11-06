@@ -11,24 +11,24 @@ export default defineConfig({
     VitePWA({
       injectRegister: 'auto',
       registerType: 'autoUpdate',
-      includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'mask-icon.svg'],
+      includeAssets: ['favicon_192.svg', 'favicon_512.svg'],
       manifest: {
         name: "Artur's Bakery",
-        short_name: 'MyApp',
-        description: 'My Awesome App description',
-        theme_color: '#77B836',
+        short_name: 'Bakery',
+        description: 'App de padaria gourmet',
+        theme_color: '#ffb000',
         icons: [
           {
-            src: 'favicon.svg',
+            src: 'favicon_192.svg',
             sizes: '192x192',
-            type: 'image/svg+xml'
+            type: 'image/svg+xml',
           },
           {
-            src: 'favicon.svg',
+            src: 'favicon_512.svg',
             sizes: '512x512',
-            type: 'image/svg+xml'
+            type: 'image/svg+xml',
           }
-        ]
+        ],
       },
       workbox: {
         globPatterns: ['**/*.{js,css,html,ico,png,svg}']

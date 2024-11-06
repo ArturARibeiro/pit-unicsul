@@ -7,7 +7,7 @@ import type {Module} from "@modules/common/types/module";
 import withSuspense from "@modules/common/presentation/hocs/withSuspense";
 
 // Pages
-const ComponentsPage = lazy(() => import('@modules/application/presentation/pages/ComponentsPage'));
+const LandingPage = lazy(() => import('@modules/application/presentation/pages/LandingPage'));
 
 const ApplicationModule: Module = {
   name: 'Application Module',
@@ -15,9 +15,9 @@ const ApplicationModule: Module = {
   // Module Routes
   routes: [
     {
-      path: '/demo/components',
-      Component: withSuspense(ComponentsPage),
-    }
+      path: '/',
+      Component: withSuspense(LandingPage),
+    },
   ],
 }
 

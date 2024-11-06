@@ -12,7 +12,7 @@ import {StyledBreadcrumb, StyledBreadcrumbItem, StyledBreadcrumbLink} from "./Br
 const Breadcrumb = forwardRef<HTMLOListElement, BreadcrumbProps>(({items, ...rest}, ref) => {
   return (
     <StyledBreadcrumb {...rest} ref={ref}>
-      <Each data={items} render={item => (
+      <Each data={items.filter(i => i.name)} render={item => (
         <StyledBreadcrumbItem>
           <StyledBreadcrumbLink to={item.href ?? '#'} children={item.name}/>
         </StyledBreadcrumbItem>

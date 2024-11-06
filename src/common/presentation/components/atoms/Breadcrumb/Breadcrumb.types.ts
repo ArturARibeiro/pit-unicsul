@@ -1,7 +1,7 @@
 import {HTMLAttributes} from "react";
 
 export type BreadcrumbItem = {
-  name: string;
+  name?: string;
   href?: string;
 }
 
