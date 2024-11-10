@@ -10,7 +10,7 @@ export const StyledProductCustomization = styled.div(() => css`
 export const StyledProductCustomizationName = styled.h5(() => css`
     font-size: 1rem;
     margin: 0;
-    padding: .5rem;
+    padding: 1rem;
     background: #88888822;
     display: inline-flex;
     align-items: center;

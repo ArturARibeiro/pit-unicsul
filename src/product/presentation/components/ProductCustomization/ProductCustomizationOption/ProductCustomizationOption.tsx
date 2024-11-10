@@ -1,39 +1,39 @@
 // Types
 import type {ProductCustomizationOptionProps} from "./ProductCustomizationOption.types";
-import type {MouseEvent} from "react";
 
 // Utils
 import {formatCurrency} from "@modules/product/domain/utils/money";
 
+// Components
+import Checkbox from "@common/presentation/components/atoms/Checkbox";
+import Radio from "@common/presentation/components/atoms/Radio";
+
 // Styled components
 import {
   StyledProductCustomizationOption,
-  StyledProductCustomizationOptionCheck,
   StyledProductCustomizationOptionLabel,
   StyledProductCustomizationOptionName,
-  StyledProductCustomizationOptionPrice,
-  StyledProductCustomizationOptionRadio
+  StyledProductCustomizationOptionPrice
 } from "./ProductCustomizationOption.styles";
 
 const ProductCustomizationOption = ({ option, multiple, onChange, ...rest }: ProductCustomizationOptionProps) => {
-  const handleOnClick = (ev: MouseEvent<HTMLInputElement>) => {
-    ev.preventDefault();
+  const handleOnChange = () => {
     onChange?.(option);
   };
 
   return (
     <StyledProductCustomizationOption>
       <StyledProductCustomizationOptionLabel htmlFor={`option-${option.id}`}>
-        <StyledProductCustomizationOptionName>{option.name}</StyledProductCustomizationOptionName>
+        <StyledProductCustomizationOptionName children={option.name}/>
         {option.priceModifier !== 0 && (
-          <StyledProductCustomizationOptionPrice>{formatCurrency(option.priceModifier)}</StyledProductCustomizationOptionPrice>
+          <StyledProductCustomizationOptionPrice children={formatCurrency(option.priceModifier)}/>
         )}
       </StyledProductCustomizationOptionLabel>
 
       {multiple ? (
-        <StyledProductCustomizationOptionCheck onClick={handleOnClick} {...rest}/>
+        <Checkbox onChange={handleOnChange} id={`option-${option.id}`} {...rest}/>
       ) : (
-        <StyledProductCustomizationOptionRadio onClick={handleOnClick} {...rest}/>
+        <Radio onChange={handleOnChange} id={`option-${option.id}`} {...rest}/>
       )}
     </StyledProductCustomizationOption>
   );

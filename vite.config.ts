@@ -33,6 +33,14 @@ export default defineConfig({
       workbox: {
         globPatterns: ['**/*.{js,css,html,ico,png,svg}']
       }
-    })
+    }),
   ],
+
+  server: {
+    host: '0.0.0.0',
+    hmr: {
+      host: '0.0.0.0',
+      port: 8081
+    }
+  }
 })

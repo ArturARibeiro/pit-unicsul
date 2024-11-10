@@ -1,5 +1,33 @@
 import styled, {css} from "styled-components";
 
+export const StyledProductPageNavigation = styled.nav(() => css`
+    position: absolute;
+    right: 0;
+    top: 0;
+    left: 0;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+`)
+
+export const StyledProductPageNavigationButton = styled.button(() => css`
+    width: 3rem;
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 3rem;
+    line-height: 1;
+    background: #FFFFFF;
+    border: none;
+    box-shadow: 0 0 4px #88888822;
+    
+    & .bi {
+        -webkit-text-stroke-width: .02rem;
+    }
+`)
+
 export const StyledProductPagePicture = styled.img(() => css`
     width: 100%;
     aspect-ratio: 4 / 3;
@@ -29,7 +57,6 @@ export const StyledProductPageDescription = styled.p(() => css`
 export const StyledProductPageActions = styled.div(() => css`
     display: flex;
     align-items: center;
-    gap: .5rem;
 
 
     @media screen and (max-width: 768px) {
@@ -38,8 +65,7 @@ export const StyledProductPageActions = styled.div(() => css`
         left: 0;
         bottom: 0;
         right: 0;
-        height: 3.5rem;
         background: #FFFFFF;
-        padding: .25rem .5rem;
+        padding: 1rem;
     }
 `)

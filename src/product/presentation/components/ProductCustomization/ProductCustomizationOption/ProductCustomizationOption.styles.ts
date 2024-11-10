@@ -1,17 +1,15 @@
 import styled, {css} from "styled-components";
-import Checkbox from "@common/presentation/components/atoms/Checkbox";
-import Radio from "@common/presentation/components/atoms/Radio";
 
 export const StyledProductCustomizationOption = styled.li(() => css`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 .5rem;
+    padding: .375rem 1rem;
     gap: 1rem;
 
 
     &:not(:last-child) {
-        border-bottom: solid 1px grey;
+        border-bottom: solid 1px #88888833;
     }
 `)
 
@@ -38,12 +36,4 @@ export const StyledProductCustomizationOptionPrice = styled.span(() => css`
     &:before {
         content: '+ ';
     }
-`)
-
-export const StyledProductCustomizationOptionCheck = styled(Checkbox)(() => css`
-    //
-`)
-
-export const StyledProductCustomizationOptionRadio = styled(Radio)(() => css`
-    //
 `)

@@ -4,4 +4,5 @@ import type {CartCustomization} from "@modules/cart/types";
 export interface ProductCustomizationProps {
   customization: ProductCustomization;
   selections?: CartCustomization
+  onChange?: (cartCustomization: CartCustomization) => void
 }

@@ -3,6 +3,7 @@ import {v4 as uuid} from 'uuid';
 // Types
 import type {CartCustomization, CartItem} from "@modules/cart/types";
 import type {Product} from "@modules/product/types";
+import products from "@modules/product/data/mocks/products.ts";
 
 export const createFromProduct = (product: Product, selections: CartCustomization[] = []): CartItem => ({
   id: uuid(),
@@ -11,3 +12,15 @@ export const createFromProduct = (product: Product, selections: CartCustomizatio
   amount: product.promotionPrice || product.basePrice,
   selectedCustomizations: selections
 })
+
+export const createFromProductId = (productId: Product['id'], selections: CartCustomization[] = []): CartItem => {
+  const product = products.find(p => p.id === productId)!;
+
+  return {
+    id: uuid(),
+    product: product,
+    quantity: product.quantityGap,
+    amount: product.promotionPrice || product.basePrice,
+    selectedCustomizations: selections
+  }
+}

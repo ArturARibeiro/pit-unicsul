@@ -1,18 +1,18 @@
-import {useCallback, useEffect, useState} from "react";
-import {ScrollRestoration, useParams} from "react-router-dom";
+import {ScrollRestoration, useNavigate, useParams} from "react-router-dom";
+import {useReducer} from "react";
 
 // Types
 import type {ProductPageRouteParams} from "./ProductPage.types.ts";
-import type {Product, ProductCategory} from "@modules/product/types";
 
-// Services
-import * as ProductService from "@modules/product/data/services/ProductService";
-import * as CategoryService from "@modules/product/data/services/CategoryService";
+// DTOs
+import {createFromProductId} from "@modules/cart/data/dtos/CartItemDto";
+
+// Reducers
+import CartItemReducer from "@modules/cart/domain/reducers/CartItemReducer";
 
 // Components
 import Each from "@modules/common/presentation/components/atoms/Each";
 import ProductPrice from "@modules/product/presentation/components/ProductPrice";
-import Breadcrumb from "@common/presentation/components/atoms/Breadcrumb/Breadcrumb.tsx";
 import Button from "@common/presentation/components/atoms/Button";
 import ProductQuantity from "@modules/product/presentation/components/ProductQuantity";
 import ProductCustomization from "@modules/product/presentation/components/ProductCustomization";
@@ -23,66 +23,95 @@ import {
   StyledProductPageDescription,
   StyledProductPageInfo,
   StyledProductPageName,
+  StyledProductPageNavigation,
+  StyledProductPageNavigationButton,
   StyledProductPagePicture,
   StyledProductPageSku
 } from "./ProductPage.styles";
+import {CartCustomization} from "@modules/cart/types";
 
 const ProductPage = () => {
-  const {product_id} = useParams<ProductPageRouteParams>();
-  const [product, setProduct] = useState<Product | null>(null);
-  const [category, setCategory] = useState<ProductCategory | null>(null);
-  const breadcrumb = [
-    {name: 'Produtos', href: '/products'},
-    {name: category?.name, href: `/categories/${category?.slug}`},
-    {name: product?.name},
-  ]
+  const { product_id } = useParams<ProductPageRouteParams>();
+  const [{ product, quantity, selectedCustomizations }, dispatch] = useReducer(CartItemReducer, createFromProductId(product_id!));
+  const navigate = useNavigate();
 
-  const loadData = useCallback(async () => {
-    const products = await ProductService.getAll();
-    const product = products.find(p => p.id == product_id!);
+  console.log(quantity, selectedCustomizations);
+  const handleIncrementQuantity = () => {
+    dispatch({type: 'INCREMENT_QUANTITY'});
+  }
 
-    if (product) {
-      const category = await CategoryService.find(product.categories[0]);
+  const handleDecrementQuantity = () => {
+    dispatch({type: 'DECREMENT_QUANTITY'});
+  }
 
-      setCategory(category);
-      setProduct(product);
-    }
-  }, [product_id])
+  const handleEditCustomization = (customization: CartCustomization) => {
+    dispatch({type: 'EDIT_CUSTOMIZATION', payload: customization});
+  }
 
-  useEffect(() => {
-    loadData();
-  }, [loadData]);
+  const handleGoBack = () => {
+    navigate(-1);
+  }
+
+  const handleSharePage = () => {
+    window.navigator.share({
+      url: window.location.href,
+      title: product.name,
+      text: 'Confira essa delícia!'
+    })
+  }
 
   return product && (
-    <div className="container py-3">
-      <ScrollRestoration/>
-      <Breadcrumb className="mb-3 d-none d-md-flex" items={breadcrumb}/>
+    <div className="container px-0">
+      <StyledProductPageNavigation>
+        <StyledProductPageNavigationButton onClick={handleGoBack}>
+          <i className="bi bi-arrow-left"></i>
+        </StyledProductPageNavigationButton>
+        <StyledProductPageNavigationButton onClick={handleSharePage}>
+          <i className="bi bi-share"></i>
+        </StyledProductPageNavigationButton>
+      </StyledProductPageNavigation>
+
+      <ScrollRestoration />
+      {/*<Breadcrumb className="mb-3 d-none d-md-flex" items={breadcrumb} />*/}
 
       <div className="row g-3">
         <div className="col-12 col-md-5 col-lg-6">
-          <StyledProductPagePicture src={product.picture}/>
+          <StyledProductPagePicture src={product.picture} />
         </div>
         <div className="col-12 col-md-7 col-lg-6">
-          <StyledProductPageInfo>
+          <StyledProductPageInfo className="px-3">
             <StyledProductPageSku>SKU: {product.sku}</StyledProductPageSku>
             <StyledProductPageName>{product.name}</StyledProductPageName>
             <StyledProductPageDescription>{product.description}</StyledProductPageDescription>
-            <ProductPrice basePrice={product.basePrice} promotionPrice={product.promotionPrice}/>
+            <ProductPrice basePrice={product.basePrice} promotionPrice={product.promotionPrice} />
           </StyledProductPageInfo>
 
           <Each data={product.customizations} render={customization => (
-            <ProductCustomization customization={customization}/>
+            <ProductCustomization
+              customization={customization}
+              selections={selectedCustomizations.find(c => c.customizationId == customization.id)}
+              onChange={handleEditCustomization}
+            />
           )}/>
 
+          <label className="d-flex flex-column mb-3 px-3">
+            <h6 className="mb-1">Alguma observação?</h6>
+            <textarea placeholder="Adicione um comentário" className="p-2 rounded-2 border"></textarea>
+          </label>
+
           <StyledProductPageActions>
-            <ProductQuantity quantity={product.quantityGap} unit={product.unit}/>
+            <ProductQuantity
+              unit={product.unit}
+              quantity={quantity}
+              onDecrement={handleDecrementQuantity}
+              onIncrement={handleIncrementQuantity}
+            />
             <Button className="w-100">Adicionar</Button>
           </StyledProductPageActions>
         </div>
       </div>
     </div>
-  )
-}
-
+  );
+};
 
 export default ProductPage;

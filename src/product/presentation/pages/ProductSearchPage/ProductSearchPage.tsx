@@ -1,0 +1,53 @@
+import {useState} from "react";
+import {useNavigate} from "react-router-dom";
+
+// Types
+import type {Product} from "@modules/product/types";
+
+// Mocks
+import products from "@modules/product/data/mocks/products.ts";
+
+// Components
+import Input from "@common/presentation/components/atoms/Input";
+import Each from "@common/presentation/components/atoms/Each";
+import ProductCard from "@modules/product/presentation/components/ProductCard";
+
+// Styled Components
+import {StyledProductSearchIllustration} from "./ProductSearchPage.styles";
+
+const ProductSearchPage = () => {
+  const [search, setSearch] = useState<string>('');
+  const navigate = useNavigate();
+
+  const filtered = products.filter(product => {
+    return product.name.toLowerCase().includes(search.toLowerCase());
+  })
+
+  const handleGoToProductPage = (product: Product) => {
+    navigate(`/products/${product.id}`);
+  }
+
+  return (
+    <div className="container py-3 d-flex flex-column">
+      <Input placeholder="Busque por produtos" onChange={e => setSearch(e.target.value)} className="mb-3"/>
+
+      <div className="row g-2">
+        {search.length >= 2 ? (
+          filtered?.length > 0 ? (
+            <Each data={filtered} render={product => (
+              <div className="col-12">
+                <ProductCard variant="small" product={product} onClick={() => handleGoToProductPage(product)}/>
+              </div>
+            )}/>
+          ): (
+            <h6 className="text-center">Nenhum produto encontrado</h6>
+          )
+        ) : (
+          <StyledProductSearchIllustration src="/search-ilustration.png" className="my-4" alt="Search ilustration"/>
+        )}
+      </div>
+    </div>
+  )
+}
+
+export default ProductSearchPage;
