@@ -13,10 +13,10 @@ import {
   StyledProductCustomizationOption,
   StyledProductCustomizationOptionLabel,
   StyledProductCustomizationOptionName,
-  StyledProductCustomizationOptionPrice
+  StyledProductCustomizationOptionPrice,
 } from "./ProductCustomizationOption.styles";
 
-const ProductCustomizationOption = ({ option, multiple, onChange, ...rest }: ProductCustomizationOptionProps) => {
+const ProductCustomizationOption = ({ option, multiple, onChange, checked, ...rest }: ProductCustomizationOptionProps) => {
   const handleOnChange = () => {
     onChange?.(option);
   };
@@ -24,16 +24,27 @@ const ProductCustomizationOption = ({ option, multiple, onChange, ...rest }: Pro
   return (
     <StyledProductCustomizationOption>
       <StyledProductCustomizationOptionLabel htmlFor={`option-${option.id}`}>
-        <StyledProductCustomizationOptionName children={option.name}/>
+        <StyledProductCustomizationOptionName children={option.name} />
         {option.priceModifier !== 0 && (
-          <StyledProductCustomizationOptionPrice children={formatCurrency(option.priceModifier)}/>
+          <StyledProductCustomizationOptionPrice children={formatCurrency(option.priceModifier)} />
         )}
       </StyledProductCustomizationOptionLabel>
 
       {multiple ? (
-        <Checkbox onChange={handleOnChange} id={`option-${option.id}`} {...rest}/>
+        <Checkbox
+          onChange={handleOnChange}
+          id={`option-${option.id}`}
+          checked={checked}
+          {...rest}
+        />
       ) : (
-        <Radio onChange={handleOnChange} id={`option-${option.id}`} {...rest}/>
+        <Radio
+          onClick={handleOnChange}
+          onChange={() => {}}
+          id={`option-${option.id}`}
+          checked={checked}
+          {...rest}
+        />
       )}
     </StyledProductCustomizationOption>
   );

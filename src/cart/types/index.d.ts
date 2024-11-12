@@ -10,6 +10,7 @@ export type CartItem = {
   quantity: number;
   amount: number;
   notes?: string;
+  valid?: boolean;
   selectedCustomizations: CartCustomization[];
 };
 

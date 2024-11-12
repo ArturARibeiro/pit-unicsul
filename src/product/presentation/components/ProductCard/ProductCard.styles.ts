@@ -12,7 +12,7 @@ export const StyledProductCard = styled.div<{$variant: ProductCardProps['variant
     display: flex;
     flex-direction: column;
     position: relative;
-    min-width: 150px;
+    min-width: 100px;
     
     ${$variant == 'small' && StyledProductCardSmall}
 `)
@@ -24,6 +24,10 @@ export const StyledProductCardPicture = styled.img(() => css`
     background: #88888844;
     border-radius: .5rem;
     object-fit: cover;
+    
+    @media screen and (min-width: 768px) {
+        aspect-ratio: 4 / 3;
+    }
 `)
 
 export const StyledProductCardName = styled.h6(() => css`

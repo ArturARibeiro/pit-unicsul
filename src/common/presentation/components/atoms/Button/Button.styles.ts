@@ -6,7 +6,7 @@ import type {ButtonProps} from "./Button.types";
 export const StyledButton = styled.button<{
   $variant: ButtonProps['variant']
 }>(({ $variant }) => css`
-    padding: .675rem 1rem;
+    padding: .75rem 1rem;
     border-radius: .375rem;
     border: solid 1px #ffb000;
     background: #ffb000;
@@ -25,6 +25,12 @@ export const StyledButton = styled.button<{
 
     &:active {
         opacity: .675;
+    }
+    
+    &:disabled {
+        opacity: .5;
+        filter: grayscale(.875);
+        cursor: not-allowed;
     }
 
     ${$variant == 'ghost' && GhostButton}

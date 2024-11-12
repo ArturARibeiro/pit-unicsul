@@ -1,5 +1,15 @@
 import styled, {css} from "styled-components";
 
+export const StyledProductPage = styled.div(() => css`
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    
+    @media screen and (min-width: 768px) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+`)
+
 export const StyledProductPageNavigation = styled.nav(() => css`
     position: absolute;
     right: 0;
@@ -9,6 +19,12 @@ export const StyledProductPageNavigation = styled.nav(() => css`
     display: flex;
     align-items: center;
     justify-content: space-between;
+    
+    @media screen and (min-width: 768px) {
+        position: relative;
+        margin-bottom: 1rem;
+        padding: 0;
+    }
 `)
 
 export const StyledProductPageNavigationButton = styled.button(() => css`
@@ -57,10 +73,10 @@ export const StyledProductPageDescription = styled.p(() => css`
 export const StyledProductPageActions = styled.div(() => css`
     display: flex;
     align-items: center;
-
+    gap: 1rem;
 
     @media screen and (max-width: 768px) {
-        position: fixed;
+        position: sticky;
         z-index: 1024;
         left: 0;
         bottom: 0;

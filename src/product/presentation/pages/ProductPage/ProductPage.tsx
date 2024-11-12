@@ -1,8 +1,12 @@
 import {ScrollRestoration, useNavigate, useParams} from "react-router-dom";
-import {useReducer} from "react";
+import {useCallback, useEffect, useReducer, useState} from "react";
 
 // Types
 import type {ProductPageRouteParams} from "./ProductPage.types.ts";
+import type {CartCustomization} from "@modules/cart/types";
+
+// Hooks
+import useCart from "@modules/cart/domain/hooks/useCart.ts";
 
 // DTOs
 import {createFromProductId} from "@modules/cart/data/dtos/CartItemDto";
@@ -16,9 +20,11 @@ import ProductPrice from "@modules/product/presentation/components/ProductPrice"
 import Button from "@common/presentation/components/atoms/Button";
 import ProductQuantity from "@modules/product/presentation/components/ProductQuantity";
 import ProductCustomization from "@modules/product/presentation/components/ProductCustomization";
+import Textarea from "@common/presentation/components/atoms/Textarea";
 
 // Styled components
 import {
+  StyledProductPage,
   StyledProductPageActions,
   StyledProductPageDescription,
   StyledProductPageInfo,
@@ -26,42 +32,70 @@ import {
   StyledProductPageNavigation,
   StyledProductPageNavigationButton,
   StyledProductPagePicture,
-  StyledProductPageSku
+  StyledProductPageSku,
 } from "./ProductPage.styles";
-import {CartCustomization} from "@modules/cart/types";
 
 const ProductPage = () => {
   const { product_id } = useParams<ProductPageRouteParams>();
-  const [{ product, quantity, selectedCustomizations }, dispatch] = useReducer(CartItemReducer, createFromProductId(product_id!));
+  const [cartItem, cartItemAction] = useReducer(CartItemReducer, createFromProductId(product_id!));
+  const [valid, setValid] = useState<boolean>(false);
+  const { addItem } = useCart();
   const navigate = useNavigate();
 
-  console.log(quantity, selectedCustomizations);
   const handleIncrementQuantity = () => {
-    dispatch({type: 'INCREMENT_QUANTITY'});
-  }
+    cartItemAction({ type: "INCREMENT_QUANTITY" });
+  };
 
   const handleDecrementQuantity = () => {
-    dispatch({type: 'DECREMENT_QUANTITY'});
+    cartItemAction({ type: "DECREMENT_QUANTITY" });
+  };
+
+  const handleAddNotes = (notes: string) => {
+    cartItemAction({type: "UPDATE_NOTE", payload: notes});
   }
 
-  const handleEditCustomization = (customization: CartCustomization) => {
-    dispatch({type: 'EDIT_CUSTOMIZATION', payload: customization});
-  }
+  const handleEditCustomization = useCallback((customization: CartCustomization) => {
+    cartItemAction({ type: "EDIT_CUSTOMIZATION", payload: customization });
+  }, []);
 
   const handleGoBack = () => {
-    navigate(-1);
-  }
+    if (history.length > 2) {
+      navigate(-1);
+    } else {
+      navigate("/");
+    }
+  };
 
   const handleSharePage = () => {
-    window.navigator.share({
-      url: window.location.href,
-      title: product.name,
-      text: 'Confira essa delícia!'
-    })
+    navigator.share({
+      url: location.href,
+      title: cartItem.product.name,
+      text: "Confira essa delícia! \n",
+    });
+  };
+
+  const handleAddProductToCart = () => {
+    if (valid) {
+      addItem(cartItem);
+      navigate("/");
+    }
   }
 
-  return product && (
-    <div className="container px-0">
+  useEffect(() => {
+    setValid(() => (
+      !cartItem.product.customizations.some((customization) => (
+        customization.isRequired &&
+        !cartItem.selectedCustomizations.some(
+          selected => selected.customizationId === customization.id && selected.options.length
+        )
+      ))
+    ));
+  }, [cartItem.selectedCustomizations, cartItem.product.customizations, cartItem]);
+
+  return cartItem.product && (
+    <div className="container py-md-4 px-0">
+      <ScrollRestoration />
+
       <StyledProductPageNavigation>
         <StyledProductPageNavigationButton onClick={handleGoBack}>
           <i className="bi bi-arrow-left"></i>
@@ -71,45 +105,50 @@ const ProductPage = () => {
         </StyledProductPageNavigationButton>
       </StyledProductPageNavigation>
 
-      <ScrollRestoration />
-      {/*<Breadcrumb className="mb-3 d-none d-md-flex" items={breadcrumb} />*/}
+      <StyledProductPage>
+        <StyledProductPagePicture src={cartItem.product.picture}/>
 
-      <div className="row g-3">
-        <div className="col-12 col-md-5 col-lg-6">
-          <StyledProductPagePicture src={product.picture} />
-        </div>
-        <div className="col-12 col-md-7 col-lg-6">
+        <div className="d-flex flex-column">
           <StyledProductPageInfo className="px-3">
-            <StyledProductPageSku>SKU: {product.sku}</StyledProductPageSku>
-            <StyledProductPageName>{product.name}</StyledProductPageName>
-            <StyledProductPageDescription>{product.description}</StyledProductPageDescription>
-            <ProductPrice basePrice={product.basePrice} promotionPrice={product.promotionPrice} />
+            <StyledProductPageSku>SKU: {cartItem.product.sku}</StyledProductPageSku>
+            <StyledProductPageName>{cartItem.product.name}</StyledProductPageName>
+            <StyledProductPageDescription>{cartItem.product.description}</StyledProductPageDescription>
+            <ProductPrice
+              basePrice={cartItem.product.basePrice}
+              promotionPrice={cartItem.product.promotionPrice}
+            />
           </StyledProductPageInfo>
 
-          <Each data={product.customizations} render={customization => (
+          <Each data={cartItem.product.customizations} render={(customization) => (
             <ProductCustomization
               customization={customization}
-              selections={selectedCustomizations.find(c => c.customizationId == customization.id)}
+              selections={cartItem.selectedCustomizations.find(c => c.customizationId === customization.id)}
               onChange={handleEditCustomization}
             />
           )}/>
 
-          <label className="d-flex flex-column mb-3 px-3">
+          <label className="d-flex flex-column my-3 px-3">
             <h6 className="mb-1">Alguma observação?</h6>
-            <textarea placeholder="Adicione um comentário" className="p-2 rounded-2 border"></textarea>
+            <Textarea
+              value={cartItem.notes}
+              placeholder="Adicione um comentário"
+              onChange={e => handleAddNotes(e.target.value)}
+            />
           </label>
 
           <StyledProductPageActions>
             <ProductQuantity
-              unit={product.unit}
-              quantity={quantity}
+              unit={cartItem.product.unit}
+              quantity={cartItem.quantity}
               onDecrement={handleDecrementQuantity}
               onIncrement={handleIncrementQuantity}
             />
-            <Button className="w-100">Adicionar</Button>
+            <Button className="w-100" onClick={handleAddProductToCart} disabled={!valid}>
+              Adicionar
+            </Button>
           </StyledProductPageActions>
         </div>
-      </div>
+      </StyledProductPage>
     </div>
   );
 };

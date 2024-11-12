@@ -14,6 +14,10 @@ export const StyledMainLayoutNavigation = styled.nav(() => css`
     background: #FFFFFF;
     box-shadow: 0 -1px 4px #88888822;
     z-index: 1024;
+    
+    @media screen and (min-width: 768px) {
+        display: none;
+    }
 `)
 
 export const StyledMainLayoutNavigationMenu = styled.ul(() => css`

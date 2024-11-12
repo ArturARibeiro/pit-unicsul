@@ -1,8 +1,8 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
 // Types
 import type {ProductCustomizationProps} from "./ProductCustomization.types.ts";
-import type {CartCustomization, CartCustomizationOption} from "@modules/cart/types";
+import type {CartCustomization} from "@modules/cart/types";
 
 // Components
 import ProductCustomizationOption from "./ProductCustomizationOption";
@@ -12,65 +12,70 @@ import Each from "@modules/common/presentation/components/atoms/Each";
 import {
   StyledProductCustomization,
   StyledProductCustomizationList,
-  StyledProductCustomizationName
+  StyledProductCustomizationName,
 } from "./ProductCustomization.styles.ts";
 
 const ProductCustomization = ({ customization, onChange }: ProductCustomizationProps) => {
   const [cartCustomization, setCartCustomization] = useState<CartCustomization>({
     customizationId: customization.id,
-    options: []
+    options: [],
   });
 
   const handleSelectOption = (optionId: string) => {
-    setCartCustomization(prevCustomization => {
+    setCartCustomization((prev) => {
       const isMultiple = customization.type === 'multiple';
-      const selectedOptions = prevCustomization.options.map(opt => opt.optionId);
+      const selectedOptions = prev.options;
+      const optionExists = selectedOptions.some(opt => opt.optionId === optionId);
+      const maxSelections = customization.maxSelections ?? Infinity;
 
-      if (selectedOptions.includes(optionId)) {
-        console.log(selectedOptions);
-        return {
-          ...prevCustomization,
-          options: prevCustomization.options.filter(opt => opt.optionId !== optionId)
-        };
+      if (isMultiple) {
+        if (optionExists) {
+          const updatedOptions = selectedOptions.filter(opt => opt.optionId !== optionId);
+          return { ...prev, options: updatedOptions };
+        } else if (selectedOptions.length < maxSelections) {
+          const updatedOptions = [...selectedOptions, { optionId }];
+          return { ...prev, options: updatedOptions };
+        } else {
+          return prev;
+        }
+      } else {
+        return optionExists
+          ? { ...prev, options: [] }
+          : { ...prev, options: [{ optionId }] };
       }
-
-      // Adiciona nova opção ou substitui, dependendo do tipo
-      const newOptions: CartCustomizationOption[] = isMultiple
-        ? [...prevCustomization.options, { optionId }]
-        : [{ optionId }];
-
-      onChange?.({
-        ...prevCustomization,
-        options: newOptions
-      })
-
-      return {
-        ...prevCustomization,
-        options: newOptions
-      };
     });
   };
+
+  // Usando useEffect para chamar onChange apenas quando cartCustomization mudar
+  useEffect(() => {
+    onChange?.(cartCustomization);
+  }, [cartCustomization, onChange]);
 
   return (
     <StyledProductCustomization>
       <StyledProductCustomizationName>
         {customization.name}
-
-        {customization.isRequired && (
-          <small>Obrigatório</small>
-        )}
+        {customization.isRequired && <small>Obrigatório</small>}
       </StyledProductCustomizationName>
 
       <StyledProductCustomizationList>
-        <Each data={customization.options} render={option => (
-          <ProductCustomizationOption
-            option={option}
-            multiple={customization.type === 'multiple'}
-            required={customization.isRequired}
-            checked={cartCustomization.options.some(opt => opt.optionId === option.id)}
-            onChange={() => handleSelectOption(option.id)}
-          />
-        )} />
+        <Each
+          data={customization.options}
+          render={(option) => (
+            <ProductCustomizationOption
+              option={option}
+              multiple={customization.type === "multiple"}
+              required={customization.isRequired}
+              checked={cartCustomization.options.some((opt) => opt.optionId === option.id)}
+              onChange={() => handleSelectOption(option.id)}
+              disabled={
+                customization.type === "multiple" &&
+                cartCustomization.options.length >= (customization.maxSelections ?? Infinity) &&
+                !cartCustomization.options.some((opt) => opt.optionId === option.id)
+              }
+            />
+          )}
+        />
       </StyledProductCustomizationList>
     </StyledProductCustomization>
   );

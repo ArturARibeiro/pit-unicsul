@@ -3,8 +3,7 @@ import styled, {css} from "styled-components";
 export const StyledProductCustomization = styled.div(() => css`
     display: flex;
     flex-direction: column;
-    border: solid 1px #88888844;
-    margin-bottom: 1rem;
+    border: solid 1px #88888822;
 `)
 
 export const StyledProductCustomizationName = styled.h5(() => css`

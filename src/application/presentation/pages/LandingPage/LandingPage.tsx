@@ -17,7 +17,7 @@ import {StyledLandingPageCategory} from "./LandingPage.styles";
 const LandingPage = () => {
   const navigate = useNavigate();
 
-  const promotions = products.filter(p => p.promotionPrice);
+  const promotions = products.filter(p => p.promotionPrice).splice(0, 12);
 
   const favorites = products.sort((a, b) => b.orderCount - a.orderCount);
 
@@ -26,9 +26,8 @@ const LandingPage = () => {
     navigate(`/products/${product.id}`);
   }
 
-  return <div className="container px-3 py-3">
-
-    <section className="mb-4">
+  return <div className="px-0 py-3">
+    <section className="container mb-4">
       <div className="d-inline-flex justify-content-between align-items-center w-100 mb-3">
         <h4 className="m-0">Categorias</h4>
         <Link className="text-decoration-none" to="/categories">Ver todas</Link>
@@ -37,48 +36,65 @@ const LandingPage = () => {
       <div className="row">
         <div className="col-3 d-flex flex-column align-items-center gap-2">
           <StyledLandingPageCategory>
-            <img src="/categorias/icones/pao.png" alt="Pães"/>
+            <picture className="w-100 h-100">
+              <source srcSet="/categorias/paes.png" media="(min-width: 768px)"/>
+              <img srcSet="/categorias/icones/pao.png" alt="Pães"/>
+            </picture>
           </StyledLandingPageCategory>
           Pães
         </div>
         <div className="col-3 d-flex flex-column align-items-center gap-2">
           <StyledLandingPageCategory>
-            <img src="/categorias/icones/bolo.png" alt="Bolos"/>
+            <picture className="w-100 h-100">
+              <source srcSet="/categorias/bolos.png" media="(min-width: 768px)"/>
+              <img src="/categorias/icones/bolo.png" alt="Bolos"/>
+            </picture>
           </StyledLandingPageCategory>
           Bolos
         </div>
         <div className="col-3 d-flex flex-column align-items-center gap-2">
           <StyledLandingPageCategory>
-            <img src="/categorias/icones/croissant.png" alt="Croissants"/>
+            <picture className="w-100 h-100">
+              <source srcSet="/categorias/croissants.png" media="(min-width: 768px)"/>
+              <img src="/categorias/icones/croissant.png" alt="Croissants"/>
+            </picture>
           </StyledLandingPageCategory>
           Croissants
         </div>
         <div className="col-3 d-flex flex-column align-items-center gap-2">
           <StyledLandingPageCategory>
-            <img src="/categorias/icones/donut.png" alt="Donuts"/>
+            <picture className="w-100 h-100">
+              <source srcSet="/categorias/promocoes.png" media="(min-width: 768px)"/>
+              <img src="/categorias/icones/donut.png" alt="Donuts"/>
+            </picture>
           </StyledLandingPageCategory>
           Donuts
         </div>
       </div>
-
     </section>
 
-    <section>
+    <section className="container mb-2">
       <h4>Em promoção</h4>
 
-      <div className="d-flex gap-2 overflow-x-auto" style={{ scrollbarWidth: "none" }}>
+      <div className="row flex-nowrap overflow-x-auto flex-md-wrap g-2" style={{scrollbarWidth: "none" }}>
         <Each data={promotions} render={product => (
-          <ProductCard product={product} className="mb-3" onClick={() => handleOpenProductPage(product)}/>
+          <div className="col-5 col-sm-4 col-md-3 col-lg-2">
+            <ProductCard product={product} className="mb-3" onClick={() => handleOpenProductPage(product)}/>
+          </div>
         )}/>
       </div>
     </section>
 
-    <section>
+    <section className="container">
       <h4>Mais pedidos</h4>
 
-      <Each data={favorites} render={product => (
-        <ProductCard variant="small" product={product} className="mb-3" onClick={() => handleOpenProductPage(product)}/>
-      )}/>
+      <div className="row g-2">
+        <Each data={favorites} render={product => (
+          <div className="col-12 col-sm-6 col-md-4 col-lg-3">
+            <ProductCard variant="small" product={product} className="mb-3" onClick={() => handleOpenProductPage(product)}/>
+          </div>
+        )}/>
+      </div>
     </section>
 
   </div>
