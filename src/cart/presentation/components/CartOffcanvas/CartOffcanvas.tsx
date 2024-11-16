@@ -7,9 +7,11 @@ import CartItemCard from "@modules/cart/presentation/components/CartItemCard";
 import {CartItem} from "@modules/cart/types";
 import Button from "@common/presentation/components/atoms/Button";
 import {formatCurrency} from "@modules/product/domain/utils/money.ts";
+import {useNavigate} from "react-router-dom";
 
 const CartOffcanvas = ({items = [], onIncrement, onDecrement, onRemove, ...rest}: CartOffcanvasProps) => {
   const amount = items?.reduce((a, b) => a + b.amount, 0);
+  const navigate = useNavigate();
 
   const handleDecrementItemQuantity = (cartItem: CartItem) => {
     onDecrement?.(cartItem);
@@ -21,6 +23,10 @@ const CartOffcanvas = ({items = [], onIncrement, onDecrement, onRemove, ...rest}
 
   const handleRemoveItemFromCart = (cartItem: CartItem) => {
     onRemove?.(cartItem);
+  }
+
+  const handleGoToCheckoutPage = () => {
+    navigate('/checkout');
   }
 
   return (
@@ -47,13 +53,20 @@ const CartOffcanvas = ({items = [], onIncrement, onDecrement, onRemove, ...rest}
       <div className="offcanvas-header d-flex flex-column gap-2">
         {Boolean(items.length) && (
           <div className="w-100 d-inline-flex justify-content-between align-items-center">
-            <h3 className="m-0">Total: </h3>
-            <h3 className="m-0 fw-normal">
+            <h5 className="m-0">Total: </h5>
+            <h5 className="m-0 fw-normal">
               {formatCurrency(amount)}
-            </h3>
+            </h5>
           </div>
         )}
-        <Button className="w-100" disabled={!items?.length}>Finalizar compra</Button>
+        <Button
+          className="w-100"
+          data-bs-dismiss="offcanvas"
+          onClick={handleGoToCheckoutPage}
+          disabled={!items?.length}
+        >
+          Finalizar compra
+        </Button>
       </div>
     </div>
   )

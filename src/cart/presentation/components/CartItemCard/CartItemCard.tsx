@@ -15,7 +15,7 @@ const CartItemCard = ({data, onIncrement, onDecrement, onRemove, ...rest}: CartI
   return (
     <StyledCartItemCard {...rest}>
       <StyledCartItemCardPicture src={data.product.picture}/>
-      <StyledCartItemCardName to={`/produto/${data.product.id}`} children={data.product.name}/>
+      <StyledCartItemCardName to={`/products/${data.product.id}`} children={data.product.name}/>
       <StyledCartItemCardPrice data={data}/>
 
       <StyledCartItemCardQuantity

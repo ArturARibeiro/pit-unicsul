@@ -6,8 +6,9 @@ export const StyledMainLayout = styled.div(() => css`
     grid-template-columns: 100%;
     grid-template-areas: 'header' 'content' 'navigation';
     max-width: 100vw;
-    min-height: 100%;
-    background: #FEFEFE;
+    height: 100%;
+    flex: 1;
+    background: #F4F4F4;
 `)
 
 export const StyledMainLayoutContent = styled.main(() => css`

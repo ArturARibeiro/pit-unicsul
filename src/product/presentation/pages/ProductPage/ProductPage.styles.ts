@@ -4,7 +4,7 @@ export const StyledProductPage = styled.div(() => css`
     display: grid;
     grid-template-columns: 1fr;
     gap: 1rem;
-    
+
     @media screen and (min-width: 768px) {
         grid-template-columns: repeat(2, 1fr);
     }
@@ -19,7 +19,7 @@ export const StyledProductPageNavigation = styled.nav(() => css`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    
+
     @media screen and (min-width: 768px) {
         position: relative;
         margin-bottom: 1rem;
@@ -38,7 +38,7 @@ export const StyledProductPageNavigationButton = styled.button(() => css`
     background: #FFFFFF;
     border: none;
     box-shadow: 0 0 4px #88888822;
-    
+
     & .bi {
         -webkit-text-stroke-width: .02rem;
     }
@@ -49,6 +49,12 @@ export const StyledProductPagePicture = styled.img(() => css`
     aspect-ratio: 4 / 3;
     background: #88888844;
     object-fit: cover;
+    position: sticky;
+    top: 1rem;
+
+    @media screen and (max-width: 768px) {
+        position: static;
+    }
 `)
 
 export const StyledProductPageInfo = styled.div(() => css`

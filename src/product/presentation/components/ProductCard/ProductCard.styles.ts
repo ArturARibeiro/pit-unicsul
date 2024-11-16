@@ -7,13 +7,14 @@ import {ProductCardProps} from "./ProductCard.types";
 import ProductRating from "@modules/product/presentation/components/ProductRating";
 import ProductPrice from "@modules/product/presentation/components/ProductPrice";
 
-export const StyledProductCard = styled.div<{$variant: ProductCardProps['variant']}>(({ $variant }) => css`
+export const StyledProductCard = styled.div<{ $variant: ProductCardProps['variant'] }>(({$variant}) => css`
     gap: .5rem;
     display: flex;
     flex-direction: column;
     position: relative;
     min-width: 100px;
-    
+    cursor: pointer;
+
     ${$variant == 'small' && StyledProductCardSmall}
 `)
 
@@ -24,7 +25,7 @@ export const StyledProductCardPicture = styled.img(() => css`
     background: #88888844;
     border-radius: .5rem;
     object-fit: cover;
-    
+
     @media screen and (min-width: 768px) {
         aspect-ratio: 4 / 3;
     }
@@ -48,9 +49,9 @@ export const StyledProductCardName = styled.h6(() => css`
 
 export const StyledProductCardPrice = styled(ProductPrice)(() => css`
     grid-area: price;
-    
+
     @media screen and (max-width: 768px) {
-        font-size: 1.125rem;        
+        font-size: 1.125rem;
     }
 `)
 
@@ -73,19 +74,21 @@ const StyledProductCardSmall = css`
     grid-template-areas: 'picture rating' 'picture name' 'picture price';
     grid-column-gap: 1rem;
     grid-row-gap: .25rem;
-    
+
     & ${StyledProductCardPicture} {
         aspect-ratio: auto;
         width: 4rem;
         height: 4rem;
     }
-    
+
     & ${StyledProductCardRating} {
         position: static;
         font-size: .875rem;
+        width: fit-content;
+        background: transparent;
         padding: 0;
     }
-    
+
     & ${StyledProductCardName} {
         align-self: center;
     }

@@ -5,7 +5,7 @@ import type {ButtonProps} from "./Button.types";
 
 export const StyledButton = styled.button<{
   $variant: ButtonProps['variant']
-}>(({ $variant }) => css`
+}>(({$variant}) => css`
     padding: .75rem 1rem;
     border-radius: .375rem;
     border: solid 1px #ffb000;
@@ -26,7 +26,7 @@ export const StyledButton = styled.button<{
     &:active {
         opacity: .675;
     }
-    
+
     &:disabled {
         opacity: .5;
         filter: grayscale(.875);
@@ -38,7 +38,7 @@ export const StyledButton = styled.button<{
 `)
 
 const GhostButton = css`
-    color: #efa802;
+    color: #dc9f10;
     background: #FFB00022;
     border-color: #FFB00022;
 `

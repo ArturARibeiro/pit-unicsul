@@ -16,7 +16,8 @@ import ProductCard from "@modules/product/presentation/components/ProductCard";
 import {StyledProductSearchIllustration} from "./ProductSearchPage.styles";
 
 const ProductSearchPage = () => {
-  const [search, setSearch] = useState<string>('');
+  const params = new URLSearchParams(location.search);
+  const [search, setSearch] = useState<string>(params.get("search") ?? '');
   const navigate = useNavigate();
 
   const filtered = products.filter(product => {
@@ -29,7 +30,12 @@ const ProductSearchPage = () => {
 
   return (
     <div className="container py-3 d-flex flex-column">
-      <Input placeholder="Busque por produtos" onChange={e => setSearch(e.target.value)} className="mb-3"/>
+      <Input
+        className="mb-3"
+        placeholder="Busque por produtos"
+        onChange={e => setSearch(e.target.value)}
+        value={search}
+      />
 
       <div className="row g-2">
         {search.length >= 2 ? (
@@ -39,7 +45,7 @@ const ProductSearchPage = () => {
                 <ProductCard variant="small" product={product} onClick={() => handleGoToProductPage(product)}/>
               </div>
             )}/>
-          ): (
+          ) : (
             <h6 className="text-center">Nenhum produto encontrado</h6>
           )
         ) : (

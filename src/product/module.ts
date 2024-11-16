@@ -6,6 +6,9 @@ import type {Module} from "@modules/common/types/module";
 // HOCs
 import withSuspense from "@modules/common/presentation/hocs/withSuspense";
 
+// Layouts
+import MainLayout from "@common/presentation/layouts/MainLayout";
+
 // Pages
 const ProductPage = lazy(() => import('@modules/product/presentation/pages/ProductPage'));
 const ProductSearchPage = lazy(() => import('@modules/product/presentation/pages/ProductSearchPage'));
@@ -21,6 +24,7 @@ const ProductModule: Module = {
     },
     {
       path: '/products/search',
+      layout: MainLayout,
       Component: withSuspense(ProductSearchPage),
     },
   ],
