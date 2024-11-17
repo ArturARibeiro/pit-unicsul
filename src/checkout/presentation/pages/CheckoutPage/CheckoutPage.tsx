@@ -112,6 +112,7 @@ const CheckoutPage = () => {
                   <small>Número do cartão</small>
                   <Input
                     type="text"
+                    inputMode="numeric"
                     placeholder="1234 5678 1234 5678"
                     mask="9999 9999 9999 9999"
                     value={form_data.card_number}
@@ -135,6 +136,7 @@ const CheckoutPage = () => {
                   <small>CVV</small>
                   <Input
                     type="text"
+                    inputMode="numeric"
                     placeholder="123"
                     value={form_data.cvv}
                     onChange={(e) => handleInputChange(e, "cvv")}
@@ -165,6 +167,7 @@ const CheckoutPage = () => {
                   <small>CEP</small>
                   <Input
                     type="text"
+                    inputMode="numeric"
                     placeholder="12345-689"
                     mask="99999-999"
                     value={form_data.cep}
