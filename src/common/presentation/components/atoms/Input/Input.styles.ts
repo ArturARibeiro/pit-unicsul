@@ -1,6 +1,7 @@
 import styled, {css} from "styled-components";
+import ReactInputMask from "react-input-mask";
 
-export const StyledInput = styled.input(() => css`
+export const StyledInput = styled(ReactInputMask)(() => css`
     background: #EAEAEA;
     border: solid 1px #EAEAEA;
     border-radius: .375rem;
@@ -13,7 +14,7 @@ export const StyledInput = styled.input(() => css`
     &::placeholder {
         font-weight: 500;
     }
-    
+
     &:focus {
         background: #EEEEEE;
     }

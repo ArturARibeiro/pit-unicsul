@@ -31,6 +31,16 @@ const categories: ProductCategory[] = [
     slug: 'baskets',
     image: '/categorias/cestas.png',
   },
+  {
+    name: 'Donuts',
+    slug: 'donuts',
+    image: '/categorias/donuts.png',
+  },
+  {
+    name: 'Cookies',
+    slug: 'cookies',
+    image: '/categorias/cookies.png',
+  },
 ]
 
 export default categories;

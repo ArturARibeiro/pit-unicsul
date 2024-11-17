@@ -81,6 +81,7 @@ const RegisterPage = () => {
             <Input
               type="tel"
               id="phone"
+              mask="99 99999-9999"
               placeholder="00 91234-5678"
               onChange={e => setPhone(e.target.value)}
               value={phone}

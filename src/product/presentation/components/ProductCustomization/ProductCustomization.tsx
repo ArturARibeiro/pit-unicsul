@@ -15,7 +15,7 @@ import {
   StyledProductCustomizationName,
 } from "./ProductCustomization.styles.ts";
 
-const ProductCustomization = ({ customization, onChange }: ProductCustomizationProps) => {
+const ProductCustomization = ({customization, onChange}: ProductCustomizationProps) => {
   const [cartCustomization, setCartCustomization] = useState<CartCustomization>({
     customizationId: customization.id,
     options: [],
@@ -31,22 +31,21 @@ const ProductCustomization = ({ customization, onChange }: ProductCustomizationP
       if (isMultiple) {
         if (optionExists) {
           const updatedOptions = selectedOptions.filter(opt => opt.optionId !== optionId);
-          return { ...prev, options: updatedOptions };
+          return {...prev, options: updatedOptions};
         } else if (selectedOptions.length < maxSelections) {
-          const updatedOptions = [...selectedOptions, { optionId }];
-          return { ...prev, options: updatedOptions };
+          const updatedOptions = [...selectedOptions, {optionId}];
+          return {...prev, options: updatedOptions};
         } else {
           return prev;
         }
       } else {
         return optionExists
-          ? { ...prev, options: [] }
-          : { ...prev, options: [{ optionId }] };
+          ? {...prev, options: []}
+          : {...prev, options: [{optionId}]};
       }
     });
   };
 
-  // Usando useEffect para chamar onChange apenas quando cartCustomization mudar
   useEffect(() => {
     onChange?.(cartCustomization);
   }, [cartCustomization, onChange]);

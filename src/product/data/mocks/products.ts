@@ -419,9 +419,9 @@ const cakes: Product[] = [
         "type": "single",
         "isRequired": true,
         "options": [
-          { "id": "filling_chocolate", "name": "Chocolate", "priceModifier": 0.0 },
-          { "id": "filling_strawberry", "name": "Morango", "priceModifier": 2.0 },
-          { "id": "filling_vanilla", "name": "Baunilha", "priceModifier": 1.5 }
+          {"id": "filling_chocolate", "name": "Chocolate", "priceModifier": 0.0},
+          {"id": "filling_strawberry", "name": "Morango", "priceModifier": 2.0},
+          {"id": "filling_vanilla", "name": "Baunilha", "priceModifier": 1.5}
         ]
       },
       {
@@ -430,8 +430,8 @@ const cakes: Product[] = [
         "type": "multiple",
         "isRequired": false,
         "options": [
-          { "id": "topping_nuts", "name": "Nozes", "priceModifier": 1.0 },
-          { "id": "topping_sprinkles", "name": "Granulado", "priceModifier": 0.5 }
+          {"id": "topping_nuts", "name": "Nozes", "priceModifier": 1.0},
+          {"id": "topping_sprinkles", "name": "Granulado", "priceModifier": 0.5}
         ]
       }
     ],
@@ -471,8 +471,8 @@ const cakes: Product[] = [
         "type": "single",
         "isRequired": true,
         "options": [
-          { "id": "frosting_lemon", "name": "Cobertura de limão", "priceModifier": 0.0 },
-          { "id": "frosting_chocolate", "name": "Cobertura de chocolate", "priceModifier": 1.5 }
+          {"id": "frosting_lemon", "name": "Cobertura de limão", "priceModifier": 0.0},
+          {"id": "frosting_chocolate", "name": "Cobertura de chocolate", "priceModifier": 1.5}
         ]
       }
     ],
@@ -513,9 +513,9 @@ const cakes: Product[] = [
         "type": "single",
         "isRequired": false,
         "options": [
-          { "id": "layer_one", "name": "1 camada", "priceModifier": 0.0 },
-          { "id": "layer_two", "name": "2 camadas", "priceModifier": 5.0 },
-          { "id": "layer_three", "name": "3 camadas", "priceModifier": 10.0 }
+          {"id": "layer_one", "name": "1 camada", "priceModifier": 0.0},
+          {"id": "layer_two", "name": "2 camadas", "priceModifier": 5.0},
+          {"id": "layer_three", "name": "3 camadas", "priceModifier": 10.0}
         ]
       }
     ],
@@ -555,8 +555,8 @@ const cakes: Product[] = [
         "type": "multiple",
         "isRequired": false,
         "options": [
-          { "id": "decoration_fruits", "name": "Frutas frescas", "priceModifier": 3.0 },
-          { "id": "decoration_chocolate", "name": "Raspas de chocolate", "priceModifier": 2.0 }
+          {"id": "decoration_fruits", "name": "Frutas frescas", "priceModifier": 3.0},
+          {"id": "decoration_chocolate", "name": "Raspas de chocolate", "priceModifier": 2.0}
         ]
       }
     ],
@@ -1010,12 +1010,328 @@ const baskets: Product[] = [
   }
 ]
 
+const donuts: Product[] = [
+  {
+    "id": "77411c9c-75b7-4f47-92ba-d6c7fae334af",
+    "sku": "DONUT001",
+    "name": "Donut Glaceado",
+    "picture": "/produtos/donuts/glaceado.png",
+    "basePrice": 3.5,
+    "promotionPrice": 3.0,
+    "description": "Donut clássico coberto com glacê doce.",
+    "rating": 4.7,
+    "unit": "uni",
+    "orderCount": 120,
+    "quantityGap": 1,
+    "tags": ["glacê", "clássico", "doce", "tradicional"],
+    "categories": ["donuts", "promotions"],
+    "customizations": []
+  },
+  {
+    "id": "f39b1a6b-3082-4c88-8d96-3b7f87d0ad73",
+    "sku": "DONUT002",
+    "name": "Donut de Chocolate",
+    "picture": "/produtos/donuts/chocolate.png",
+    "basePrice": 4.0,
+    "description": "Donut macio coberto com chocolate cremoso.",
+    "rating": 4.9,
+    "unit": "uni",
+    "orderCount": 100,
+    "quantityGap": 1,
+    "categories": ["donuts"],
+    "tags": ["chocolate", "cremoso", "favorito"],
+    "customizations": []
+  },
+  {
+    "id": "35df9ae5-d614-4b63-837e-b5b89f63cfa3",
+    "sku": "DONUT003",
+    "name": "Donut de Morango",
+    "picture": "/produtos/donuts/morango.png",
+    "basePrice": 4.5,
+    "description": "Donut recheado e coberto com geleia de morango.",
+    "rating": 4.8,
+    "unit": "uni",
+    "orderCount": 80,
+    "quantityGap": 1,
+    "categories": ["donuts"],
+    "tags": ["morango", "geleia", "fruta", "recheado"],
+    "customizations": [
+      {
+        "id": "icing",
+        "name": "Escolha a cobertura",
+        "type": "single",
+        "isRequired": true,
+        "options": [
+          {
+            "id": "icing_chocolate",
+            "name": "Chocolate",
+            "priceModifier": 0.5
+          },
+          {
+            "id": "icing_vanilla",
+            "name": "Baunilha",
+            "priceModifier": 0.5
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ae2e2062-9e44-4045-81a3-19ebcfd8bd75",
+    "sku": "DONUT004",
+    "name": "Donut de Caramelo",
+    "picture": "/produtos/donuts/caramelo.png",
+    "basePrice": 4.0,
+    "promotionPrice": 3.5,
+    "description": "Donut recheado com caramelo artesanal.",
+    "rating": 4.6,
+    "unit": "uni",
+    "orderCount": 70,
+    "quantityGap": 1,
+    "tags": ["caramelo", "artesanal", "doce", "recheado"],
+    "categories": ["donuts", "promotions"],
+    "customizations": []
+  },
+  {
+    "id": "18f44639-7b8a-4f73-9db4-9c9e1c7d5148",
+    "sku": "DONUT005",
+    "name": "Donut Vegano",
+    "picture": "/produtos/donuts/vegano.png",
+    "basePrice": 5.0,
+    "description": "Donut sem ingredientes de origem animal, sabor baunilha.",
+    "rating": 4.5,
+    "unit": "uni",
+    "orderCount": 50,
+    "quantityGap": 1,
+    "categories": ["donuts"],
+    "tags": ["vegano", "baunilha", "sem origem animal"],
+    "customizations": []
+  },
+  {
+    "id": "82ab2d5f-e95a-40de-b7d1-8c5f01d9ab99",
+    "sku": "DONUT006",
+    "name": "Donut de Canela",
+    "picture": "/produtos/donuts/canela.png",
+    "basePrice": 3.5,
+    "description": "Donut polvilhado com açúcar e canela.",
+    "rating": 4.7,
+    "unit": "uni",
+    "orderCount": 85,
+    "quantityGap": 1,
+    "categories": ["donuts"],
+    "tags": ["canela", "açúcar", "clássico"],
+    "customizations": []
+  },
+  {
+    "id": "d133fd57-6c54-44e4-b46c-3e1faaffb162",
+    "sku": "DONUT007",
+    "name": "Donut de Limão",
+    "picture": "/produtos/donuts/limao.png",
+    "basePrice": 4.5,
+    "description": "Donut com cobertura azedinha de limão.",
+    "rating": 4.4,
+    "unit": "uni",
+    "orderCount": 60,
+    "quantityGap": 1,
+    "categories": ["donuts"],
+    "tags": ["limão", "azedinho", "refrescante"],
+    "customizations": []
+  },
+  {
+    "id": "5c5dff8c-3b23-4907-9274-d5428d836dbd",
+    "sku": "DONUT008",
+    "name": "Donut Oreo",
+    "picture": "/produtos/donuts/oreo.png",
+    "basePrice": 5.5,
+    "promotionPrice": 4.5,
+    "description": "Donut coberto com pedaços de Oreo e creme.",
+    "rating": 4.8,
+    "unit": "uni",
+    "orderCount": 40,
+    "quantityGap": 1,
+    "tags": ["oreo", "creme", "biscoito", "gourmet"],
+    "categories": ["donuts", "promotions"],
+    "customizations": []
+  },
+  {
+    "id": "46c51b4e-90ea-41d2-9cf8-f3c272d5e6e4",
+    "sku": "DONUT009",
+    "name": "Donut de Frutas Vermelhas",
+    "picture": "/produtos/donuts/frutas-vermelhas.png",
+    "basePrice": 5.0,
+    "description": "Donut recheado com frutas vermelhas.",
+    "rating": 4.9,
+    "unit": "uni",
+    "orderCount": 45,
+    "quantityGap": 1,
+    "categories": ["donuts"],
+    "tags": ["frutas vermelhas", "recheado", "fruta", "doce"],
+    "customizations": []
+  },
+  {
+    "id": "1cf1ffba-2f8f-4c5e-bb59-ea66b2442091",
+    "sku": "DONUT010",
+    "name": "Donut Matcha",
+    "picture": "/produtos/donuts/matcha.png",
+    "basePrice": 6.0,
+    "description": "Donut com cobertura de chá verde matcha.",
+    "rating": 4.6,
+    "unit": "uni",
+    "orderCount": 30,
+    "quantityGap": 1,
+    "categories": ["donuts"],
+    "tags": ["matcha", "chá verde", "especial", "gourmet"],
+    "customizations": []
+  },
+  {
+    "id": "d2500ec2-3f0a-4de0-b7e4-df3e9d0c7b53",
+    "sku": "DONUT011",
+    "name": "Donut Red Velvet",
+    "picture": "/produtos/donuts/red-velvet.png",
+    "basePrice": 5.5,
+    "description": "Donut de massa vermelha com cobertura cremosa.",
+    "rating": 4.7,
+    "unit": "uni",
+    "orderCount": 35,
+    "quantityGap": 1,
+    "categories": ["donuts"],
+    "tags": ["red velvet", "cremoso", "massa especial"],
+    "customizations": []
+  },
+  {
+    "id": "b19236b1-9a27-4c52-9175-84c1d2fbc871",
+    "sku": "DONUT012",
+    "name": "Donut de Doce de Leite",
+    "picture": "/produtos/donuts/doce-de-leite.png",
+    "basePrice": 4.5,
+    "promotionPrice": 4.0,
+    "description": "Donut recheado com doce de leite caseiro.",
+    "rating": 4.8,
+    "unit": "uni",
+    "orderCount": 55,
+    "quantityGap": 1,
+    "tags": ["doce de leite", "caseiro", "recheado"],
+    "categories": ["donuts", "promotions"],
+    "customizations": []
+  },
+  {
+    "id": "b195a6fa-53c7-48f8-b24b-8c9c3c5e5fd8",
+    "sku": "DONUT013",
+    "name": "Donut de Pistache",
+    "picture": "/produtos/donuts/pistache.png",
+    "basePrice": 6.5,
+    "description": "Donut coberto com creme e pedaços de pistache.",
+    "rating": 4.7,
+    "unit": "uni",
+    "orderCount": 25,
+    "quantityGap": 1,
+    "categories": ["donuts"],
+    "tags": ["pistache", "cremoso", "premium"],
+    "customizations": []
+  },
+  {
+    "id": "f9a85a2e-d4d2-4b98-9cb6-d2e6a0d64b83",
+    "sku": "DONUT014",
+    "name": "Donut Gourmet",
+    "picture": "/produtos/donuts/gourmet.png",
+    "basePrice": 7.0,
+    "description": "Donut premium com cobertura especial de Nutella.",
+    "rating": 4.9,
+    "unit": "uni",
+    "orderCount": 20,
+    "quantityGap": 1,
+    "categories": ["donuts"],
+    "tags": ["nutella", "premium", "especial", "gourmet"],
+    "customizations": []
+  }
+]
+
+const cookies: Product[] = [
+  {
+    "id": "82f8b8c8-0c47-43c4-a8ee-86b93a2553e1",
+    "sku": "COOKIE001",
+    "name": "Cookie de Chocolate com Nozes",
+    "picture": "/produtos/cookies/chocolate-com-nozes.png",
+    "basePrice": 4.0,
+    "description": "Cookie artesanal com pedaços de chocolate meio amargo e nozes crocantes.",
+    "rating": 4.9,
+    "unit": "uni",
+    "orderCount": 85,
+    "quantityGap": 1,
+    "categories": ["cookies"],
+    "customizations": [],
+    "tags": ["chocolate", "nozes", "artesanal", "crocante"]
+  },
+  {
+    "id": "c6e32c7b-1bfb-4d83-a69c-e2f04b58f827",
+    "sku": "COOKIE002",
+    "name": "Cookie de Aveia com Mel",
+    "picture": "/produtos/cookies/aveia-com-mel.png",
+    "basePrice": 3.5,
+    "description": "Um cookie macio e saudável, feito com aveia integral e um toque de mel.",
+    "rating": 4.7,
+    "unit": "uni",
+    "orderCount": 70,
+    "quantityGap": 1,
+    "categories": ["cookies"],
+    "customizations": [],
+    "tags": ["aveia", "mel", "saudável", "macio"]
+  },
+  {
+    "id": "b482e8ba-9641-494f-bc6d-7b77a6ccf1bc",
+    "sku": "COOKIE003",
+    "name": "Cookie de Manteiga de Amendoim",
+    "picture": "/produtos/cookies/manteiga-de-amendoim.png",
+    "basePrice": 4.5,
+    "description": "Delicioso cookie feito com manteiga de amendoim natural, ideal para os amantes desse sabor.",
+    "rating": 4.8,
+    "unit": "uni",
+    "orderCount": 65,
+    "quantityGap": 1,
+    "categories": ["cookies"],
+    "customizations": [],
+    "tags": ["manteiga de amendoim", "sabor intenso", "cremoso", "artesanal"]
+  },
+  {
+    "id": "a32429f7-0c32-4e69-80a7-2eb24a2290bc",
+    "sku": "COOKIE004",
+    "name": "Cookie Red Velvet",
+    "picture": "/produtos/cookies/red-velvet.png",
+    "basePrice": 5.0,
+    "description": "Cookie macio de red velvet com pedaços de chocolate branco.",
+    "rating": 4.9,
+    "unit": "uni",
+    "orderCount": 90,
+    "quantityGap": 1,
+    "categories": ["cookies"],
+    "customizations": [],
+    "tags": ["red velvet", "chocolate branco", "macio", "gourmet"]
+  },
+  {
+    "id": "2ff2355e-cb9d-4c52-b769-07ab1f3f1b67",
+    "sku": "COOKIE005",
+    "name": "Cookie de Frutas Secas",
+    "picture": "/produtos/cookies/frutas-secas.png",
+    "basePrice": 4.5,
+    "description": "Cookie recheado com uma mistura de frutas secas como uvas passas, damascos e cranberries.",
+    "rating": 4.6,
+    "unit": "uni",
+    "orderCount": 55,
+    "quantityGap": 1,
+    "categories": ["cookies"],
+    "customizations": [],
+    "tags": ["frutas secas", "damasco", "cranberry", "saudável"]
+  }
+]
+
 const products: Product[] = [
   ...juices,
   ...breads,
   ...cakes,
   ...croissants,
   ...baskets,
+  ...donuts,
+  ...cookies,
 ];
 
 export default products;

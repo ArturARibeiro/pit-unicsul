@@ -75,7 +75,7 @@ const LandingPage = () => {
           <div className="col-3 d-flex flex-column align-items-center gap-2">
             <StyledLandingPageCategory onClick={() => handleGoToCategoryPage('donuts')}>
               <picture className="w-100 h-100">
-                <source srcSet="/categorias/promocoes.png" media="(min-width: 768px)"/>
+                <source srcSet="/categorias/donuts.png" media="(min-width: 768px)"/>
                 <img src="/categorias/icones/donut.png" alt="Donuts"/>
               </picture>
               <StyledLandingPageCategoryTitle children="Donuts"/>

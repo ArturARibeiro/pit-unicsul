@@ -25,16 +25,18 @@ const CategoryPage = () => {
     navigate(`/products/${product.id}`)
   }
 
-  return category && (
+  return (
     <>
-      <StyledCategoryPageBanner>
-        <img src={category.image} alt={category.name}/>
+      {category && (
+        <StyledCategoryPageBanner>
+          <img src={category.image} alt={category.name}/>
 
-        <StyledCategoryPageTitle
-          className="container"
-          children={category.name}
-        />
-      </StyledCategoryPageBanner>
+          <StyledCategoryPageTitle
+            className="container"
+            children={category.name}
+          />
+        </StyledCategoryPageBanner>
+      )}
       <div className="container py-3 py-md-5">
         <div className="row g-4">
           <Each data={filtered} render={product => (
