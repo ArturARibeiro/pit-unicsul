@@ -18,12 +18,14 @@ const CartItemCard = ({data, onIncrement, onDecrement, onRemove, ...rest}: CartI
       <StyledCartItemCardName to={`/products/${data.product.id}`} children={data.product.name}/>
       <StyledCartItemCardPrice data={data}/>
 
-      <StyledCartItemCardQuantity
-        onIncrement={onIncrement}
-        onDecrement={onDecrement}
-        onRemove={onRemove}
-        data={data}
-      />
+      {(onIncrement || onDecrement) && (
+        <StyledCartItemCardQuantity
+          onIncrement={onIncrement}
+          onDecrement={onDecrement}
+          onRemove={onRemove}
+          data={data}
+        />
+      )}
 
       {Boolean(data.selectedCustomizations.length) && (
         <StyledCartItemCardCustomizations data={data}/>

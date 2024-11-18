@@ -23,6 +23,10 @@ const MainLayoutNavigation = () => {
     navigate("/products/search");
   }
 
+  const handleGoToOrdersPage = () => {
+    navigate("/orders");
+  }
+
   const handleGoToProfilePage = () => {
     return auth.check ? navigate("/profile") : navigate("/login");
   }
@@ -48,7 +52,10 @@ const MainLayoutNavigation = () => {
           <i className="bi bi-search"></i>
           Buscar
         </StyledMainLayoutNavigationMenuItem>
-        <StyledMainLayoutNavigationMenuItem aria-selected={location.pathname === '/orders'}>
+        <StyledMainLayoutNavigationMenuItem
+          aria-selected={location.pathname.includes('/orders')}
+          onClick={handleGoToOrdersPage}
+        >
           <i className="bi bi-receipt"></i>
           Pedidos
         </StyledMainLayoutNavigationMenuItem>

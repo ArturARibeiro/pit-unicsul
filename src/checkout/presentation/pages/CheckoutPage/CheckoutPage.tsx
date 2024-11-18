@@ -24,7 +24,7 @@ import Button from "@common/presentation/components/atoms/Button";
 import {StyledCheckoutPageForm, StyledCheckoutPageReview} from "./CheckoutPage.styles";
 
 const CheckoutPage = () => {
-  const {state} = useCart();
+  const {state, clearCart} = useCart();
   const [, setOrders] = useLocalStorage<Order[]>('orders', []);
   const total = state.items.reduce((acc, item) => acc + item.amount, 0);
   const navigate = useNavigate();
@@ -91,6 +91,7 @@ const CheckoutPage = () => {
       return [...prev, order];
     });
 
+    clearCart();
     return navigate(`/orders/${order.id}`);
   }
 
