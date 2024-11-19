@@ -28,6 +28,7 @@ const AuthenticationModule: Module = {
     },
     {
       path: '/profile',
+      protected: true,
       layout: MainLayout,
       Component: withSuspense(ProfilePage),
     },

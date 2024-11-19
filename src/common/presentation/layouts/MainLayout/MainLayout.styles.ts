@@ -14,4 +14,6 @@ export const StyledMainLayout = styled.div(() => css`
 export const StyledMainLayoutContent = styled.main(() => css`
     grid-area: content;
     flex: 1;
+    display: flex;
+    flex-direction: column;
 `)

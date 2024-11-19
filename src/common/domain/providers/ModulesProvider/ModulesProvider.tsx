@@ -12,6 +12,7 @@ import modulesReducer from "@common/domain/reducers/ModulesReducer";
 
 // High-Order-Components
 import withNestedComponents from "@common/presentation/hocs/withNestedComponents";
+import Protected from "@modules/authentication/presentation/components/Protected";
 
 
 const ModulesProvider = () => {
@@ -41,6 +42,12 @@ const ModulesProvider = () => {
 
           if (!routesMap[layoutKey]) {
             routesMap[layoutKey] = { Component: route.layout, children: [] };
+          }
+
+          if (route.protected && route.Component) {
+            route.Component = withNestedComponents(route.Component, [
+              Protected,
+            ])
           }
 
           routesMap[layoutKey].children?.push(route);

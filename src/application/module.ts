@@ -11,6 +11,7 @@ import MainLayout from "@common/presentation/layouts/MainLayout";
 
 // Pages
 const LandingPage = lazy(() => import('@modules/application/presentation/pages/LandingPage'));
+const NotFound = lazy(() => import('@modules/application/presentation/pages/NotFound'));
 
 const ApplicationModule: Module = {
   name: 'Application Module',
@@ -21,6 +22,11 @@ const ApplicationModule: Module = {
       path: '/',
       layout: MainLayout,
       Component: withSuspense(LandingPage),
+    },
+    {
+      path: '/*',
+      layout: MainLayout,
+      Component: withSuspense(NotFound),
     },
   ],
 }

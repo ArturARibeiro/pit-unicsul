@@ -19,6 +19,7 @@ const CheckoutModule: Module = {
   routes: [
     {
       path: '/checkout',
+      protected: true,
       layout: MainLayout,
       Component: withSuspense(CheckoutPage),
     },

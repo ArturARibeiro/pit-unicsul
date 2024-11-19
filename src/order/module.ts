@@ -19,11 +19,13 @@ const OrderModule: Module = {
   routes: [
     {
       path: '/orders',
+      protected: true,
       layout: MainLayout,
       Component: withSuspense(OrderListPage),
     },
     {
       path: '/orders/:order_id',
+      protected: true,
       layout: MainLayout,
       Component: withSuspense(OrderPage),
     }
