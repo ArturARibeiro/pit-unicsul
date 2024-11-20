@@ -6,6 +6,8 @@ export type Order = {
   status: 'pending' | 'preparing' | 'transport' | 'concluded' | 'canceled';
   address: Address;
   items: OrderItem[];
+  review?: string;
+  rate: number;
 }
 
 export type Address = {
