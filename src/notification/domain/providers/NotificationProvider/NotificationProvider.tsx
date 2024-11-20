@@ -11,9 +11,16 @@ const NotificationProvider = (props: NotificationProviderProps) => {
     Notification.permission === 'granted'
   );
 
-  const dispatchNotification = (title: string) => {
+  const dispatchNotification = (title: string, body: string = '') => {
     if (allowed) {
-      new Notification(title);
+      try {
+        new Notification(title, {
+          icon: '/favicon_192.svg',
+          body: body,
+        });
+      } catch (e) {
+        console.error(e);
+      }
     }
   }
 
