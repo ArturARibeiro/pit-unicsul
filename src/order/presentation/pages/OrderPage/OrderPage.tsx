@@ -14,9 +14,11 @@ import {formatCurrency} from "@modules/product/domain/utils/money.ts";
 import Button from "@common/presentation/components/atoms/Button";
 import Textarea from "@common/presentation/components/atoms/Textarea";
 import OrderRate from "@modules/order/presentation/components/OrderRate";
+import useNotification from "@modules/notification/domain/hooks/useNotification.ts";
 
 const OrderPage = () => {
   const {order_id} = useParams<OrderPageParams>();
+  const {dispatchNotification} = useNotification();
   const [orders, setOrders] = useLocalStorage<Order[]>('orders', []);
   const [currentOrder, setCurrentOrder] = useState<Order | null>(null);
   const [review, setReview] = useState<string>('');
@@ -68,6 +70,15 @@ const OrderPage = () => {
 
     if (validTransitions[currentOrder.status].includes(newStatus)) {
       const updatedOrder = {...currentOrder, status: newStatus};
+
+      if (newStatus === "preparing") {
+        dispatchNotification("Seu produto está sendo preparado!")
+      }
+
+      if (newStatus === "transport") {
+        dispatchNotification("Seu pedido está em transporte!")
+      }
+
       setCurrentOrder(updatedOrder);
       setOrders(prev =>
         prev.map(o => (o.id === currentOrder.id ? updatedOrder : o))

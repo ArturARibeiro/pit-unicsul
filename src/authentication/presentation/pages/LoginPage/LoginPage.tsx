@@ -27,6 +27,10 @@ const LoginPage = () => {
     setError('Usuário(a) não encontrado!');
   }
 
+  const handleGoToHomePage = () => {
+    navigate("/");
+  }
+
   const handleGoToRegisterPage = () => {
     navigate("/register");
   }
@@ -34,7 +38,12 @@ const LoginPage = () => {
   return (
     <StyledLoginPage>
       <StyledLoginPageForm onSubmit={handleFormSubmit}>
-        <h4 className="mb-3">Login</h4>
+        <div className="d-flex align-items-center gap-3 mb-3">
+          <Button variant="ghost" onClick={handleGoToHomePage} className="p-2">
+            <i className="bi bi-arrow-left"></i>
+          </Button>
+          <h4 className="m-0">Login</h4>
+        </div>
 
         <div className="row g-2">
           {Boolean(error.length) && (
@@ -68,7 +77,7 @@ const LoginPage = () => {
           </div>
           <div className="col-12 d-flex flex-column gap-1">
             <Button type="submit" className="w-100">Acessar</Button>
-            <Button type="button" className="w-100" variant="ghost" onClick={handleGoToRegisterPage}>
+            <Button type="button" className="w-100" variant="outline" onClick={handleGoToRegisterPage}>
               Criar uma conta
             </Button>
           </div>

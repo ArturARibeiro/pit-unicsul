@@ -3,6 +3,7 @@ import {useLocalStorage} from "usehooks-ts";
 // Contexts
 import AuthContext from "@modules/authentication/domain/contexts/AuthContext";
 
+
 // Types
 import type {AuthProviderProps} from "./AuthProvider.types";
 import type {User} from "@modules/authentication/types";
