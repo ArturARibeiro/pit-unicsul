@@ -7,7 +7,7 @@ export type Order = {
   address: Address;
   items: OrderItem[];
   review?: string;
-  rate: number;
+  rate?: number;
 }
 
 export type Address = {
