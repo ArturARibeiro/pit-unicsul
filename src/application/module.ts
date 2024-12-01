@@ -22,7 +22,6 @@ const ApplicationModule: Module = {
     {
       path: '/',
       layout: MainLayout,
-      HydrateFallback: () => 'Carregando....',
       lazy: LandingPage,
     },
     {
