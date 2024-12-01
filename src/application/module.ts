@@ -8,10 +8,10 @@ import withSuspense from "@modules/common/presentation/hocs/withSuspense";
 
 // Layouts
 import MainLayout from "@common/presentation/layouts/MainLayout";
-import LandingPageLoader from "@modules/application/data/loaders/LandingPageLoader/LandingPageLoader.ts";
 
 // Pages
-const LandingPage = lazy(() => import('@modules/application/presentation/pages/LandingPage'));
+import LandingPage from "@modules/application/presentation/pages/LandingPage";
+
 const NotFound = lazy(() => import('@modules/application/presentation/pages/NotFound'));
 
 const ApplicationModule: Module = {
@@ -22,8 +22,8 @@ const ApplicationModule: Module = {
     {
       path: '/',
       layout: MainLayout,
-      loader: LandingPageLoader,
-      Component: withSuspense(LandingPage),
+      HydrateFallback: () => 'Carregando....',
+      lazy: LandingPage,
     },
     {
       path: '/*',

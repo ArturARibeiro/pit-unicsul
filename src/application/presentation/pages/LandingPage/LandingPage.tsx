@@ -2,7 +2,6 @@ import {useLoaderData, useNavigate} from "react-router-dom";
 
 // Types
 import type {Product} from "@modules/product/types";
-import type {LandingPageLoaderData} from "@modules/application/data/loaders/LandingPageLoader";
 
 // Components
 import Search from "@modules/application/presentation/components/Search";
@@ -18,7 +17,7 @@ import {
 } from "./LandingPage.styles";
 
 const LandingPage = () => {
-  const {products} = useLoaderData() as LandingPageLoaderData;
+  const products = useLoaderData() as Product[];
   const navigate = useNavigate();
 
   const promotions = products.filter(p => p.promotion_price).splice(0, 6);

@@ -1,4 +1,4 @@
-import {Suspense, useEffect, useReducer} from "react";
+import {useEffect, useReducer} from "react";
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
 
 // Types
@@ -13,7 +13,6 @@ import modulesReducer from "@common/domain/reducers/ModulesReducer";
 // High-Order-Components
 import withNestedComponents from "@common/presentation/hocs/withNestedComponents";
 import Protected from "@modules/authentication/presentation/components/Protected";
-
 
 const ModulesProvider = () => {
   const [{ routes, providers, loading }, dispatch] = useReducer(modulesReducer, {
@@ -41,7 +40,10 @@ const ModulesProvider = () => {
           const layoutKey = route.layout?.displayName || route.layout?.name || 'default';
 
           if (!routesMap[layoutKey]) {
-            routesMap[layoutKey] = { Component: route.layout, children: [] };
+            routesMap[layoutKey] = {
+              Component: route.layout,
+              children: []
+            };
           }
 
           if (route.protected && route.Component) {
@@ -66,9 +68,7 @@ const ModulesProvider = () => {
 
   return (
     <ModulesContext.Provider value={{}}>
-      <Suspense fallback={<h1>loading...</h1>}>
-        {!loading && <ProvidedRouter router={createBrowserRouter(routes)} />}
-      </Suspense>
+      {!loading && <ProvidedRouter router={createBrowserRouter(routes)} />}
     </ModulesContext.Provider>
   );
 };

@@ -3,7 +3,7 @@ import {useCallback, useEffect, useReducer, useState} from "react";
 
 // Types
 import type {CartCustomization} from "@modules/cart/types";
-import type {ProductPageLoaderData} from "@modules/product/data/loaders/ProductPageLoader";
+import type {Product} from "@modules/product/types";
 
 // Hooks
 import useCart from "@modules/cart/domain/hooks/useCart.ts";
@@ -36,11 +36,11 @@ import {
 } from "./ProductPage.styles";
 
 const ProductPage = () => {
+  const product = useLoaderData() as Product;
   const navigate = useNavigate();
-  const { addItem } = useCart();
-  const { product } = useLoaderData() as ProductPageLoaderData;
   const [cartItem, cartItemAction] = useReducer(CartItemReducer, createFromProduct(product));
   const [valid, setValid] = useState<boolean>(false);
+  const { addItem } = useCart();
 
   const handleIncrementQuantity = () => {
     cartItemAction({ type: "INCREMENT_QUANTITY" });

@@ -15,7 +15,7 @@ import MainLayoutNavigation from "./MainLayoutNavigation";
 // Styled components
 import {StyledMainLayout, StyledMainLayoutContent} from "./MainLayout.styles";
 
-const MainLayout = (props: MainLayoutProps) => {
+const MainLayout = ({children, ...rest}: MainLayoutProps) => {
   const { state, incrementQuantity, decrementQuantity, removeItem } = useCart();
 
   const handleDecrementItemQuantity = (cartItem: CartItem) => {
@@ -39,8 +39,8 @@ const MainLayout = (props: MainLayoutProps) => {
   return (
     <StyledMainLayout>
       <MainLayoutHeader />
-      <StyledMainLayoutContent {...props}>
-        <Outlet />
+      <StyledMainLayoutContent {...rest}>
+        {children || <Outlet />}
       </StyledMainLayoutContent>
       <MainLayoutNavigation/>
       <CartOffcanvas
