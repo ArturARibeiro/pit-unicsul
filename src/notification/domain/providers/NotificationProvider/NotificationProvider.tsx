@@ -67,8 +67,8 @@ const NotificationProvider = (props: NotificationProviderProps) => {
     };
 
     if (!eventSource) {
-      // const source = connectEventSource();
-      // window.addEventListener("beforeunload", () => source.close());
+      const source = connectEventSource();
+      window.addEventListener("beforeunload", () => source.close());
     }
 
     window.addEventListener('sse:notification', onServerSentNotification);
