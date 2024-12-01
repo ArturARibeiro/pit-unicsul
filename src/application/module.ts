@@ -8,6 +8,7 @@ import withSuspense from "@modules/common/presentation/hocs/withSuspense";
 
 // Layouts
 import MainLayout from "@common/presentation/layouts/MainLayout";
+import LandingPageLoader from "@modules/application/data/loaders/LandingPageLoader/LandingPageLoader.ts";
 
 // Pages
 const LandingPage = lazy(() => import('@modules/application/presentation/pages/LandingPage'));
@@ -21,6 +22,7 @@ const ApplicationModule: Module = {
     {
       path: '/',
       layout: MainLayout,
+      loader: LandingPageLoader,
       Component: withSuspense(LandingPage),
     },
     {

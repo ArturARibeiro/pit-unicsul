@@ -1,11 +1,9 @@
 import {useState} from "react";
-import {useNavigate} from "react-router-dom";
+import {useLoaderData, useNavigate} from "react-router-dom";
 
 // Types
 import type {Product} from "@modules/product/types";
-
-// Mocks
-import products from "@modules/product/data/mocks/products.ts";
+import type {ProductSearchPageLoaderData} from "@modules/product/data/loaders/ProductSearchPageLoader";
 
 // Components
 import Input from "@common/presentation/components/atoms/Input";
@@ -16,6 +14,7 @@ import ProductCard from "@modules/product/presentation/components/ProductCard";
 import {StyledProductSearchIllustration} from "./ProductSearchPage.styles";
 
 const ProductSearchPage = () => {
+  const {products} = useLoaderData() as ProductSearchPageLoaderData;
   const params = new URLSearchParams(location.search);
   const [search, setSearch] = useState<string>(params.get("search") ?? '');
   const navigate = useNavigate();

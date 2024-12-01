@@ -6,22 +6,22 @@ const defaultJuiceCustomizations: ProductCustomization[] = [
     "id": "f1c8b2b7-5283-45eb-9341-94c679bb229b",
     "name": "Escolha o tipo de adoçante",
     "type": "single",
-    "isRequired": false,
+    "is_required": false,
     "options": [
       {
         "id": "4b156716-5587-4c5e-b5fc-bd83c4d11eb6",
         "name": "Açúcar",
-        "priceModifier": 0.0
+        "price_modifier": 0.0
       },
       {
         "id": "9c21dce1-f918-4c2a-a32d-12ed58d3e0de",
         "name": "Mel",
-        "priceModifier": 0.5
+        "price_modifier": 0.5
       },
       {
         "id": "c7beaa3e-82a7-445c-bd70-20e36fcb8400",
         "name": "Stevia",
-        "priceModifier": 0.0
+        "price_modifier": 0.0
       }
     ]
   },
@@ -29,17 +29,17 @@ const defaultJuiceCustomizations: ProductCustomization[] = [
     "id": "d44d2206-3b65-474f-898e-b63f8cda19ae",
     "name": "Com gelo",
     "type": "single",
-    "isRequired": true,
+    "is_required": true,
     "options": [
       {
         "id": "aeae82f1-c17f-44ab-b17e-08d46d3d24d1",
         "name": "Com gelo",
-        "priceModifier": 0.0
+        "price_modifier": 0.0
       },
       {
         "id": "b8e58e42-846e-44a5-97f4-b4f90df92fa6",
         "name": "Sem gelo",
-        "priceModifier": 0.0
+        "price_modifier": 0.0
       }
     ]
   },
@@ -47,17 +47,17 @@ const defaultJuiceCustomizations: ProductCustomization[] = [
     "id": "87b103f3-5a84-4856-9eb5-7a803dcd2896",
     "name": "Com canudo",
     "type": "single",
-    "isRequired": true,
+    "is_required": true,
     "options": [
       {
         "id": "e209b3d7-c205-4c3f-9a98-588e82f8e660",
         "name": "Com canudo",
-        "priceModifier": 0.0
+        "price_modifier": 0.0
       },
       {
         "id": "f3de7998-d405-43b0-b438-041a40fbd8b4",
         "name": "Sem canudo",
-        "priceModifier": 0.0
+        "price_modifier": 0.0
       }
     ]
   }
@@ -69,13 +69,13 @@ const juices: Product[] = [
     "sku": "JUICE001",
     "name": "Suco de Laranja Natural",
     "picture": "/produtos/sucos/laranja.png",
-    "basePrice": 5.0,
-    "promotionPrice": 4.0,
+    "base_price": 5.0,
+    "promotion_price": 4.0,
     "description": "Suco fresco de laranja espremido na hora.",
     "rating": 4.5,
     "unit": "uni",
-    "orderCount": 150,
-    "quantityGap": 1,
+    "order_count": 150,
+    "quantity_gap": 1,
     "categories": ["juices", "promotions"],
     "customizations": defaultJuiceCustomizations,
     "tags": ["natural", "fresco", "vitamina C", "laranja", "refrescante"]
@@ -85,12 +85,12 @@ const juices: Product[] = [
     "sku": "JUICE002",
     "name": "Suco de Maçã",
     "picture": "/produtos/sucos/maca.png",
-    "basePrice": 4.5,
+    "base_price": 4.5,
     "description": "Suco de maçã natural, refrescante e saudável.",
     "rating": 4.6,
     "unit": "uni",
-    "orderCount": 120,
-    "quantityGap": 1,
+    "order_count": 120,
+    "quantity_gap": 1,
     "categories": ["juices"],
     "customizations": defaultJuiceCustomizations,
     "tags": ["maçã", "natural", "saudável", "refrescante", "vitaminas"]
@@ -100,13 +100,13 @@ const juices: Product[] = [
     "sku": "JUICE003",
     "name": "Suco Verde Detox",
     "picture": "/produtos/sucos/detox.png",
-    "basePrice": 7.0,
-    "promotionPrice": 5.5,
+    "base_price": 7.0,
+    "promotion_price": 5.5,
     "description": "Mistura refrescante de frutas e vegetais detox.",
     "rating": 4.6,
     "unit": "uni",
-    "orderCount": 80,
-    "quantityGap": 1,
+    "order_count": 80,
+    "quantity_gap": 1,
     "categories": ["juices", "promotions"],
     "customizations": defaultJuiceCustomizations,
     "tags": ["detox", "verde", "saudável", "fibras", "energético"]
@@ -116,12 +116,12 @@ const juices: Product[] = [
     "sku": "JUICE004",
     "name": "Suco de Abacaxi",
     "picture": "/produtos/sucos/abacaxi.png",
-    "basePrice": 6.0,
+    "base_price": 6.0,
     "description": "Suco refrescante de abacaxi natural.",
     "rating": 4.4,
     "unit": "uni",
-    "orderCount": 90,
-    "quantityGap": 1,
+    "order_count": 90,
+    "quantity_gap": 1,
     "categories": ["juices"],
     "customizations": defaultJuiceCustomizations,
     "tags": ["abacaxi", "refrescante", "tropical", "digestivo", "natural"]
@@ -131,12 +131,12 @@ const juices: Product[] = [
     "sku": "JUICE005",
     "name": "Suco de Manga",
     "picture": "/produtos/sucos/manga.png",
-    "basePrice": 6.5,
+    "base_price": 6.5,
     "description": "Suco fresco de manga, ideal para o verão.",
     "rating": 4.9,
     "unit": "uni",
-    "orderCount": 75,
-    "quantityGap": 1,
+    "order_count": 75,
+    "quantity_gap": 1,
     "categories": ["juices"],
     "customizations": defaultJuiceCustomizations,
     "tags": ["manga", "fresco", "verão", "doce", "refrescante"]
@@ -146,13 +146,13 @@ const juices: Product[] = [
     "sku": "JUICE006",
     "name": "Suco de Melancia",
     "picture": "/produtos/sucos/melancia.png",
-    "basePrice": 5.5,
-    "promotionPrice": 1.5,
+    "base_price": 5.5,
+    "promotion_price": 1.5,
     "description": "Suco de melancia refrescante e natural.",
     "rating": 4.8,
     "unit": "uni",
-    "orderCount": 65,
-    "quantityGap": 1,
+    "order_count": 65,
+    "quantity_gap": 1,
     "categories": ["juices", "promotions"],
     "customizations": defaultJuiceCustomizations,
     "tags": ["melancia", "refrescante", "hidratante", "verão", "natural"]
@@ -162,12 +162,12 @@ const juices: Product[] = [
     "sku": "JUICE007",
     "name": "Suco de Uva",
     "picture": "/produtos/sucos/uva.png",
-    "basePrice": 6.0,
+    "base_price": 6.0,
     "description": "Suco natural de uva, saboroso e refrescante.",
     "rating": 4.7,
     "unit": "uni",
-    "orderCount": 50,
-    "quantityGap": 1,
+    "order_count": 50,
+    "quantity_gap": 1,
     "categories": ["juices"],
     "customizations": defaultJuiceCustomizations,
     "tags": ["uva", "natural", "antioxidante", "doce", "saudável"]
@@ -177,12 +177,12 @@ const juices: Product[] = [
     "sku": "JUICE008",
     "name": "Suco de Limão",
     "picture": "/produtos/sucos/limao.png",
-    "basePrice": 5.5,
+    "base_price": 5.5,
     "description": "Suco azedo de limão, perfeito para os amantes de sabores cítricos.",
     "rating": 4.3,
     "unit": "uni",
-    "orderCount": 40,
-    "quantityGap": 1,
+    "order_count": 40,
+    "quantity_gap": 1,
     "categories": ["juices"],
     "customizations": defaultJuiceCustomizations,
     "tags": ["limão", "cítrico", "azedo", "refrescante", "natural"]
@@ -192,12 +192,12 @@ const juices: Product[] = [
     "sku": "JUICE009",
     "name": "Suco de Cenoura",
     "picture": "/produtos/sucos/cenoura.png",
-    "basePrice": 5.0,
+    "base_price": 5.0,
     "description": "Suco nutritivo de cenoura, ótimo para a saúde.",
     "rating": 4.5,
     "unit": "uni",
-    "orderCount": 30,
-    "quantityGap": 1,
+    "order_count": 30,
+    "quantity_gap": 1,
     "categories": ["juices"],
     "customizations": defaultJuiceCustomizations,
     "tags": ["cenoura", "nutritivo", "saudável", "vitaminas", "natural"]
@@ -210,12 +210,12 @@ const breads: Product[] = [
     "sku": "BREAD001",
     "name": "Pão Francês",
     "picture": "/produtos/paes/frances.png",
-    "basePrice": 3.0,
+    "base_price": 3.0,
     "description": "Pão francês fresquinho, ideal para o café da manhã.",
     "rating": 4.5,
     "unit": "uni",
-    "orderCount": 100,
-    "quantityGap": 1,
+    "order_count": 100,
+    "quantity_gap": 1,
     "categories": ["breads"],
     "customizations": [],
     "tags": ["fresquinho", "café da manhã", "tradicional", "pão crocante"]
@@ -225,12 +225,12 @@ const breads: Product[] = [
     "sku": "BREAD002",
     "name": "Pão de Queijo",
     "picture": "/produtos/paes/queijo.png",
-    "basePrice": 4.0,
+    "base_price": 4.0,
     "description": "Delicioso pão de queijo quentinho.",
     "rating": 4.8,
     "unit": "uni",
-    "orderCount": 80,
-    "quantityGap": 1,
+    "order_count": 80,
+    "quantity_gap": 1,
     "categories": ["breads"],
     "customizations": [],
     "tags": ["quentinho", "tradicional", "café da manhã", "mineiro"]
@@ -240,13 +240,13 @@ const breads: Product[] = [
     "sku": "BREAD003",
     "name": "Pão Integral",
     "picture": "/produtos/paes/integral.png",
-    "basePrice": 3.5,
-    "promotionPrice": 3,
+    "base_price": 3.5,
+    "promotion_price": 3,
     "description": "Pão integral saudável e saboroso.",
     "rating": 4.6,
     "unit": "uni",
-    "orderCount": 60,
-    "quantityGap": 1,
+    "order_count": 60,
+    "quantity_gap": 1,
     "categories": ["breads", "promotions"],
     "customizations": [],
     "tags": ["saudável", "integral", "leve", "baixo teor calórico"]
@@ -256,30 +256,30 @@ const breads: Product[] = [
     "sku": "BREAD004",
     "name": "Pão de Milho",
     "picture": "/produtos/paes/milho.png",
-    "basePrice": 4.5,
-    "promotionPrice": 4,
+    "base_price": 4.5,
+    "promotion_price": 4,
     "description": "Pão de milho macio e saboroso.",
     "rating": 4.3,
     "unit": "uni",
-    "orderCount": 50,
-    "quantityGap": 1,
+    "order_count": 50,
+    "quantity_gap": 1,
     "categories": ["breads", "promotions"],
     "customizations": [
       {
         "id": "f75e7f5e-182b-48a7-97d7-e67d29ab2b5b",
         "name": "Ingredientes adicionais",
         "type": "multiple",
-        "isRequired": false,
+        "is_required": false,
         "options": [
           {
             "id": "5ff3be95-81d7-4cf3-bb91-731a4f2d1c8b",
             "name": "Queijo",
-            "priceModifier": 1.0
+            "price_modifier": 1.0
           },
           {
             "id": "caee05f4-21ae-4d8d-b3d2-682acfe8db2d",
             "name": "Ervas finas",
-            "priceModifier": 0.5
+            "price_modifier": 0.5
           }
         ]
       }
@@ -291,12 +291,12 @@ const breads: Product[] = [
     "sku": "BREAD005",
     "name": "Pão de Centeio",
     "picture": "/produtos/paes/centeio.png",
-    "basePrice": 4.2,
+    "base_price": 4.2,
     "description": "Pão de centeio nutritivo e saboroso.",
     "rating": 4.4,
     "unit": "uni",
-    "orderCount": 40,
-    "quantityGap": 1,
+    "order_count": 40,
+    "quantity_gap": 1,
     "categories": ["breads"],
     "customizations": [],
     "tags": ["nutritivo", "centeio", "rico em fibras", "saudável"]
@@ -306,12 +306,12 @@ const breads: Product[] = [
     "sku": "BREAD006",
     "name": "Pão de Forma",
     "picture": "/produtos/paes/pao-de-forma.png",
-    "basePrice": 3.8,
+    "base_price": 3.8,
     "description": "Pão de forma leve, perfeito para sanduíches.",
     "rating": 4.5,
     "unit": "uni",
-    "orderCount": 90,
-    "quantityGap": 1,
+    "order_count": 90,
+    "quantity_gap": 1,
     "categories": ["breads"],
     "customizations": [],
     "tags": ["sanduíche", "café da manhã", "fácil de cortar", "macio"]
@@ -321,29 +321,29 @@ const breads: Product[] = [
     "sku": "BREAD007",
     "name": "Focaccia",
     "picture": "/produtos/paes/focaccia.png",
-    "basePrice": 5.0,
+    "base_price": 5.0,
     "description": "Focaccia artesanal com alecrim e sal grosso.",
     "rating": 4.7,
     "unit": "uni",
-    "orderCount": 70,
-    "quantityGap": 1,
+    "order_count": 70,
+    "quantity_gap": 1,
     "categories": ["breads"],
     "customizations": [
       {
         "id": "ad5bce9d-1f93-4f1c-8f62-11f69390c5b1",
         "name": "Escolha cobertura",
         "type": "multiple",
-        "isRequired": false,
+        "is_required": false,
         "options": [
           {
             "id": "d02b394b-4a38-457b-9f91-639d6e03e3d1",
             "name": "Queijo",
-            "priceModifier": 1.0
+            "price_modifier": 1.0
           },
           {
             "id": "46e664bb-d7a4-4e53-9517-6e376c2f8c87",
             "name": "Tomate seco",
-            "priceModifier": 1.5
+            "price_modifier": 1.5
           }
         ]
       }
@@ -355,13 +355,13 @@ const breads: Product[] = [
     "sku": "BREAD008",
     "name": "Pão de Alho",
     "picture": "/produtos/paes/alho.png",
-    "basePrice": 4.0,
-    "promotionPrice": 3.75,
+    "base_price": 4.0,
+    "promotion_price": 3.75,
     "description": "Pão de alho quentinho e crocante.",
     "rating": 4.8,
     "unit": "uni",
-    "orderCount": 30,
-    "quantityGap": 1,
+    "order_count": 30,
+    "quantity_gap": 1,
     "categories": ["breads", "promotions"],
     "customizations": [],
     "tags": ["sabor intenso", "crocante", "assado", "churrasco"]
@@ -371,12 +371,12 @@ const breads: Product[] = [
     "sku": "BREAD009",
     "name": "Pão de Batata",
     "picture": "/produtos/paes/batata.png",
-    "basePrice": 4.0,
+    "base_price": 4.0,
     "description": "Pão de batata macio e saboroso.",
     "rating": 4.6,
     "unit": "uni",
-    "orderCount": 20,
-    "quantityGap": 1,
+    "order_count": 20,
+    "quantity_gap": 1,
     "categories": ["breads"],
     "customizations": [],
     "tags": ["batata", "macio", "infantil", "lanche"]
@@ -386,12 +386,12 @@ const breads: Product[] = [
     "sku": "BREAD010",
     "name": "Pão de Mel",
     "picture": "/produtos/paes/mel.png",
-    "basePrice": 3.5,
+    "base_price": 3.5,
     "description": "Pão de mel, ideal para o lanche da tarde.",
     "rating": 4.2,
     "unit": "uni",
-    "orderCount": 25,
-    "quantityGap": 1,
+    "order_count": 25,
+    "quantity_gap": 1,
     "categories": ["breads"],
     "customizations": [],
     "tags": ["doce", "lanche da tarde", "tradicional", "sabor mel"]
@@ -404,34 +404,34 @@ const cakes: Product[] = [
     "sku": "CAKE001",
     "name": "Bolo de Chocolate",
     "picture": "/produtos/bolos/chocolate.png",
-    "basePrice": 25.0,
-    "promotionPrice": 23.99,
+    "base_price": 25.0,
+    "promotion_price": 23.99,
     "description": "Bolo de chocolate recheado e coberto com ganache.",
     "rating": 4.9,
     "unit": "kg",
-    "orderCount": 50,
-    "quantityGap": 0.5,
+    "order_count": 50,
+    "quantity_gap": 0.5,
     "categories": ["cakes", "promotions"],
     "customizations": [
       {
         "id": "flavors",
         "name": "Escolha o sabor do recheio",
         "type": "single",
-        "isRequired": true,
+        "is_required": true,
         "options": [
-          {"id": "filling_chocolate", "name": "Chocolate", "priceModifier": 0.0},
-          {"id": "filling_strawberry", "name": "Morango", "priceModifier": 2.0},
-          {"id": "filling_vanilla", "name": "Baunilha", "priceModifier": 1.5}
+          {"id": "filling_chocolate", "name": "Chocolate", "price_modifier": 0.0},
+          {"id": "filling_strawberry", "name": "Morango", "price_modifier": 2.0},
+          {"id": "filling_vanilla", "name": "Baunilha", "price_modifier": 1.5}
         ]
       },
       {
         "id": "toppings",
         "name": "Cobertura adicional",
         "type": "multiple",
-        "isRequired": false,
+        "is_required": false,
         "options": [
-          {"id": "topping_nuts", "name": "Nozes", "priceModifier": 1.0},
-          {"id": "topping_sprinkles", "name": "Granulado", "priceModifier": 0.5}
+          {"id": "topping_nuts", "name": "Nozes", "price_modifier": 1.0},
+          {"id": "topping_sprinkles", "name": "Granulado", "price_modifier": 0.5}
         ]
       }
     ],
@@ -442,12 +442,12 @@ const cakes: Product[] = [
     "sku": "CAKE002",
     "name": "Bolo de Cenoura",
     "picture": "/produtos/bolos/cenoura.png",
-    "basePrice": 22.0,
+    "base_price": 22.0,
     "description": "Bolo de cenoura com cobertura de chocolate.",
     "rating": 4.8,
     "unit": "kg",
-    "orderCount": 40,
-    "quantityGap": 0.5,
+    "order_count": 40,
+    "quantity_gap": 0.5,
     "categories": ["cakes"],
     "customizations": [],
     "tags": ["cenoura", "caseiro", "infantil", "chocolate"]
@@ -457,22 +457,22 @@ const cakes: Product[] = [
     "sku": "CAKE003",
     "name": "Bolo de Limão",
     "picture": "/produtos/bolos/limao.png",
-    "basePrice": 20.0,
+    "base_price": 20.0,
     "description": "Bolo de limão leve e refrescante.",
     "rating": 4.7,
     "unit": "kg",
-    "orderCount": 35,
-    "quantityGap": 0.5,
+    "order_count": 35,
+    "quantity_gap": 0.5,
     "categories": ["cakes"],
     "customizations": [
       {
         "id": "frosting",
         "name": "Escolha a cobertura",
         "type": "single",
-        "isRequired": true,
+        "is_required": true,
         "options": [
-          {"id": "frosting_lemon", "name": "Cobertura de limão", "priceModifier": 0.0},
-          {"id": "frosting_chocolate", "name": "Cobertura de chocolate", "priceModifier": 1.5}
+          {"id": "frosting_lemon", "name": "Cobertura de limão", "price_modifier": 0.0},
+          {"id": "frosting_chocolate", "name": "Cobertura de chocolate", "price_modifier": 1.5}
         ]
       }
     ],
@@ -483,13 +483,13 @@ const cakes: Product[] = [
     "sku": "CAKE004",
     "name": "Bolo de Fubá",
     "picture": "/produtos/bolos/fuba.png",
-    "basePrice": 18.0,
-    "promotionPrice": 17.95,
+    "base_price": 18.0,
+    "promotion_price": 17.95,
     "description": "Bolo de fubá com goiabada, uma delícia da culinária brasileira.",
     "rating": 4.6,
     "unit": "kg",
-    "orderCount": 30,
-    "quantityGap": 0.5,
+    "order_count": 30,
+    "quantity_gap": 0.5,
     "categories": ["cakes", "promotions"],
     "customizations": [],
     "tags": ["fubá", "goiabada", "brasileiro", "tradicional"]
@@ -499,23 +499,23 @@ const cakes: Product[] = [
     "sku": "CAKE005",
     "name": "Bolo Red Velvet",
     "picture": "/produtos/bolos/redvelvet.png",
-    "basePrice": 30.0,
+    "base_price": 30.0,
     "description": "Bolo red velvet com cream cheese, um clássico.",
     "rating": 4.9,
     "unit": "kg",
-    "orderCount": 20,
-    "quantityGap": 0.5,
+    "order_count": 20,
+    "quantity_gap": 0.5,
     "categories": ["cakes"],
     "customizations": [
       {
         "id": "extraLayers",
         "name": "Adicionar camadas",
         "type": "single",
-        "isRequired": false,
+        "is_required": false,
         "options": [
-          {"id": "layer_one", "name": "1 camada", "priceModifier": 0.0},
-          {"id": "layer_two", "name": "2 camadas", "priceModifier": 5.0},
-          {"id": "layer_three", "name": "3 camadas", "priceModifier": 10.0}
+          {"id": "layer_one", "name": "1 camada", "price_modifier": 0.0},
+          {"id": "layer_two", "name": "2 camadas", "price_modifier": 5.0},
+          {"id": "layer_three", "name": "3 camadas", "price_modifier": 10.0}
         ]
       }
     ],
@@ -526,12 +526,12 @@ const cakes: Product[] = [
     "sku": "CAKE006",
     "name": "Bolo de Morango",
     "picture": "/produtos/bolos/morango.png",
-    "basePrice": 28.0,
+    "base_price": 28.0,
     "description": "Bolo de morango com chantilly, fresquinho e saboroso.",
     "rating": 4.8,
     "unit": "kg",
-    "orderCount": 25,
-    "quantityGap": 0.5,
+    "order_count": 25,
+    "quantity_gap": 0.5,
     "categories": ["cakes"],
     "customizations": [],
     "tags": ["morango", "chantilly", "frutas", "fresquinho"]
@@ -541,22 +541,22 @@ const cakes: Product[] = [
     "sku": "CAKE007",
     "name": "Bolo de Baunilha",
     "picture": "/produtos/bolos/baunilha.png",
-    "basePrice": 20.0,
+    "base_price": 20.0,
     "description": "Bolo de baunilha clássico, ideal para festas.",
     "rating": 4.5,
     "unit": "kg",
-    "orderCount": 15,
-    "quantityGap": 0.5,
+    "order_count": 15,
+    "quantity_gap": 0.5,
     "categories": ["cakes"],
     "customizations": [
       {
         "id": "decorations",
         "name": "Decoração especial",
         "type": "multiple",
-        "isRequired": false,
+        "is_required": false,
         "options": [
-          {"id": "decoration_fruits", "name": "Frutas frescas", "priceModifier": 3.0},
-          {"id": "decoration_chocolate", "name": "Raspas de chocolate", "priceModifier": 2.0}
+          {"id": "decoration_fruits", "name": "Frutas frescas", "price_modifier": 3.0},
+          {"id": "decoration_chocolate", "name": "Raspas de chocolate", "price_modifier": 2.0}
         ]
       }
     ],
@@ -567,12 +567,12 @@ const cakes: Product[] = [
     "sku": "CAKE008",
     "name": "Bolo de Coco",
     "picture": "/produtos/bolos/coco.png",
-    "basePrice": 24.0,
+    "base_price": 24.0,
     "description": "Bolo de coco com cobertura de leite condensado.",
     "rating": 4.7,
     "unit": "kg",
-    "orderCount": 10,
-    "quantityGap": 0.5,
+    "order_count": 10,
+    "quantity_gap": 0.5,
     "categories": ["cakes"],
     "customizations": [],
     "tags": ["coco", "leite condensado", "cremoso", "doce"]
@@ -582,13 +582,13 @@ const cakes: Product[] = [
     "sku": "CAKE009",
     "name": "Bolo de Pinha",
     "picture": "/produtos/bolos/pinha.png",
-    "basePrice": 26.0,
-    "promotionPrice": 22.0,
+    "base_price": 26.0,
+    "promotion_price": 22.0,
     "description": "Bolo de pinha, uma delícia tropical.",
     "rating": 4.4,
     "unit": "kg",
-    "orderCount": 8,
-    "quantityGap": 0.5,
+    "order_count": 8,
+    "quantity_gap": 0.5,
     "categories": ["cakes", "promotions"],
     "customizations": [],
     "tags": ["pinha", "tropical", "diferente", "promocional"]
@@ -598,12 +598,12 @@ const cakes: Product[] = [
     "sku": "CAKE010",
     "name": "Bolo de Maracujá",
     "picture": "/produtos/bolos/maracuja.png",
-    "basePrice": 22.0,
+    "base_price": 22.0,
     "description": "Bolo de maracujá com cobertura de maracujá.",
     "rating": 4.6,
     "unit": "kg",
-    "orderCount": 5,
-    "quantityGap": 0.5,
+    "order_count": 5,
+    "quantity_gap": 0.5,
     "categories": ["cakes"],
     "customizations": [],
     "tags": ["maracujá", "frutas", "fresco", "tropical"]
@@ -616,13 +616,13 @@ const croissants: Product[] = [
     "sku": "CROISSANT001",
     "name": "Croissant Tradicional",
     "picture": "/produtos/croissants/tradicional.png",
-    "basePrice": 4.0,
-    "promotionPrice": 3.0,
+    "base_price": 4.0,
+    "promotion_price": 3.0,
     "description": "Croissant clássico, crocante por fora e macio por dentro.",
     "rating": 4.6,
     "unit": "uni",
-    "orderCount": 100,
-    "quantityGap": 1,
+    "order_count": 100,
+    "quantity_gap": 1,
     "tags": ["clássico", "crocante", "promocional"],
     "categories": ["croissants", "promotions"],
     "customizations": []
@@ -632,12 +632,12 @@ const croissants: Product[] = [
     "sku": "CROISSANT002",
     "name": "Croissant de Chocolate",
     "picture": "/produtos/croissants/chocolate.png",
-    "basePrice": 5.0,
+    "base_price": 5.0,
     "description": "Croissant recheado com chocolate derretido.",
     "rating": 4.8,
     "unit": "uni",
-    "orderCount": 80,
-    "quantityGap": 1,
+    "order_count": 80,
+    "quantity_gap": 1,
     "categories": ["croissants"],
     "tags": ["chocolate", "recheado", "doce"],
     "customizations": []
@@ -647,12 +647,12 @@ const croissants: Product[] = [
     "sku": "CROISSANT003",
     "name": "Croissant de Amêndoas",
     "picture": "/produtos/croissants/amendoas.png",
-    "basePrice": 5.5,
+    "base_price": 5.5,
     "description": "Croissant recheado com pasta de amêndoas e coberto com amêndoas laminadas.",
     "rating": 4.7,
     "unit": "uni",
-    "orderCount": 60,
-    "quantityGap": 1,
+    "order_count": 60,
+    "quantity_gap": 1,
     "categories": ["croissants"],
     "tags": ["amêndoas", "recheado", "cobertura"],
     "customizations": []
@@ -662,12 +662,12 @@ const croissants: Product[] = [
     "sku": "CROISSANT004",
     "name": "Croissant de Presunto e Queijo",
     "picture": "/produtos/croissants/presunto-e-queijo.png",
-    "basePrice": 6.0,
+    "base_price": 6.0,
     "description": "Croissant recheado com presunto e queijo, perfeito para o café da manhã.",
     "rating": 4.9,
     "unit": "uni",
-    "orderCount": 50,
-    "quantityGap": 1,
+    "order_count": 50,
+    "quantity_gap": 1,
     "categories": ["croissants"],
     "tags": ["presunto", "queijo", "café da manhã"],
     "customizations": [
@@ -675,17 +675,17 @@ const croissants: Product[] = [
         "id": "cheese_type",
         "name": "Escolha o tipo de queijo",
         "type": "single",
-        "isRequired": true,
+        "is_required": true,
         "options": [
           {
             "id": "cheese_mozzarella",
             "name": "Mussarela",
-            "priceModifier": 0.0
+            "price_modifier": 0.0
           },
           {
             "id": "cheese_cheddar",
             "name": "Cheddar",
-            "priceModifier": 1.0
+            "price_modifier": 1.0
           }
         ]
       }
@@ -696,12 +696,12 @@ const croissants: Product[] = [
     "sku": "CROISSANT005",
     "name": "Croissant de Frutas",
     "picture": "/produtos/croissants/frutas.png",
-    "basePrice": 5.0,
+    "base_price": 5.0,
     "description": "Croissant recheado com frutas da estação e creme.",
     "rating": 4.5,
     "unit": "uni",
-    "orderCount": 40,
-    "quantityGap": 1,
+    "order_count": 40,
+    "quantity_gap": 1,
     "categories": ["croissants"],
     "tags": ["frutas", "creme", "fresco"],
     "customizations": []
@@ -711,13 +711,13 @@ const croissants: Product[] = [
     "sku": "CROISSANT006",
     "name": "Mini Croissant",
     "picture": "/produtos/croissants/mini.png",
-    "basePrice": 2.5,
-    "promotionPrice": 2.15,
+    "base_price": 2.5,
+    "promotion_price": 2.15,
     "description": "Mini croissant ideal para lanches rápidos.",
     "rating": 4.4,
     "unit": "uni",
-    "orderCount": 70,
-    "quantityGap": 1,
+    "order_count": 70,
+    "quantity_gap": 1,
     "tags": ["mini", "lanche", "promocional"],
     "categories": ["croissants", "promotions"],
     "customizations": []
@@ -727,12 +727,12 @@ const croissants: Product[] = [
     "sku": "CROISSANT007",
     "name": "Croissant de Baunilha",
     "picture": "/produtos/croissants/baunilha.png",
-    "basePrice": 5.0,
+    "base_price": 5.0,
     "description": "Croissant recheado com creme de baunilha, uma delícia!",
     "rating": 4.8,
     "unit": "uni",
-    "orderCount": 30,
-    "quantityGap": 1,
+    "order_count": 30,
+    "quantity_gap": 1,
     "categories": ["croissants"],
     "tags": ["baunilha", "creme", "doce"],
     "customizations": []
@@ -742,12 +742,12 @@ const croissants: Product[] = [
     "sku": "CROISSANT008",
     "name": "Croissant Gourmet",
     "picture": "/produtos/croissants/gourmet.png",
-    "basePrice": 7.0,
+    "base_price": 7.0,
     "description": "Croissant recheado com ingredientes especiais e ervas finas.",
     "rating": 4.9,
     "unit": "uni",
-    "orderCount": 20,
-    "quantityGap": 1,
+    "order_count": 20,
+    "quantity_gap": 1,
     "categories": ["croissants"],
     "tags": ["gourmet", "ervas finas", "especial"],
     "customizations": [
@@ -755,17 +755,17 @@ const croissants: Product[] = [
         "id": "add_spread",
         "name": "Adicionar recheio extra",
         "type": "multiple",
-        "isRequired": false,
+        "is_required": false,
         "options": [
           {
             "id": "spread_honey",
             "name": "Mel",
-            "priceModifier": 1.0
+            "price_modifier": 1.0
           },
           {
             "id": "spread_jam",
             "name": "Gelete de frutas",
-            "priceModifier": 1.5
+            "price_modifier": 1.5
           }
         ]
       }
@@ -776,12 +776,12 @@ const croissants: Product[] = [
     "sku": "CROISSANT009",
     "name": "Croissant de Caramelo",
     "picture": "/produtos/croissants/caramelo.png",
-    "basePrice": 5.5,
+    "base_price": 5.5,
     "description": "Croissant coberto com caramelo, para os amantes de doce.",
     "rating": 4.6,
     "unit": "uni",
-    "orderCount": 15,
-    "quantityGap": 1,
+    "order_count": 15,
+    "quantity_gap": 1,
     "categories": ["croissants"],
     "tags": ["caramelo", "doce", "cobertura"],
     "customizations": []
@@ -794,13 +794,13 @@ const baskets: Product[] = [
     "sku": "BASKET001",
     "name": "Cesta de Café da Manhã",
     "picture": "/produtos/cestas/cafe-da-manha.png",
-    "basePrice": 50.0,
-    "promotionPrice": 47.50,
+    "base_price": 50.0,
+    "promotion_price": 47.50,
     "description": "Cesta recheada com pães, frutas, sucos e biscoitos.",
     "rating": 4.8,
     "unit": "uni",
-    "orderCount": 30,
-    "quantityGap": 1,
+    "order_count": 30,
+    "quantity_gap": 1,
     "tags": ["café da manhã", "pães", "frutas", "promocional"],
     "categories": ["baskets", "promotions"],
     "customizations": [
@@ -808,22 +808,22 @@ const baskets: Product[] = [
         "id": "juice_selection",
         "name": "Escolha o suco",
         "type": "single",
-        "isRequired": true,
+        "is_required": true,
         "options": [
           {
             "id": "juice_orange",
             "name": "Suco de Laranja",
-            "priceModifier": 0.0
+            "price_modifier": 0.0
           },
           {
             "id": "juice_apple",
             "name": "Suco de Maçã",
-            "priceModifier": 0.0
+            "price_modifier": 0.0
           },
           {
             "id": "juice_grape",
             "name": "Suco de Uva",
-            "priceModifier": 0.0
+            "price_modifier": 0.0
           }
         ]
       }
@@ -834,12 +834,12 @@ const baskets: Product[] = [
     "sku": "BASKET002",
     "name": "Cesta de Frutas",
     "picture": "/produtos/cestas/frutas.png",
-    "basePrice": 40.0,
+    "base_price": 40.0,
     "description": "Cesta composta por diversas frutas frescas da estação.",
     "rating": 4.7,
     "unit": "uni",
-    "orderCount": 25,
-    "quantityGap": 1,
+    "order_count": 25,
+    "quantity_gap": 1,
     "categories": ["baskets"],
     "tags": ["frutas", "fresco", "saudável"],
     "customizations": []
@@ -849,12 +849,12 @@ const baskets: Product[] = [
     "sku": "BASKET003",
     "name": "Cesta Gourmet",
     "picture": "/produtos/cestas/gourmet.jpeg",
-    "basePrice": 100.0,
+    "base_price": 100.0,
     "description": "Cesta gourmet com queijos, vinhos e pães especiais.",
     "rating": 4.9,
     "unit": "uni",
-    "orderCount": 15,
-    "quantityGap": 1,
+    "order_count": 15,
+    "quantity_gap": 1,
     "categories": ["baskets"],
     "tags": ["gourmet", "queijos", "vinhos", "especial"],
     "customizations": []
@@ -864,12 +864,12 @@ const baskets: Product[] = [
     "sku": "BASKET004",
     "name": "Cesta de Biscoitos",
     "picture": "/produtos/cestas/biscoitos.png",
-    "basePrice": 30.0,
+    "base_price": 30.0,
     "description": "Cesta com uma variedade de biscoitos artesanais.",
     "rating": 4.5,
     "unit": "uni",
-    "orderCount": 20,
-    "quantityGap": 1,
+    "order_count": 20,
+    "quantity_gap": 1,
     "categories": ["baskets"],
     "tags": ["biscoitos", "artesanal", "variedade"],
     "customizations": [
@@ -877,22 +877,22 @@ const baskets: Product[] = [
         "id": "cookie_types",
         "name": "Escolha os tipos de biscoitos",
         "type": "multiple",
-        "isRequired": true,
+        "is_required": true,
         "options": [
           {
             "id": "cookie_chocolate_chip",
             "name": "Biscoito de Chocolate",
-            "priceModifier": 0.0
+            "price_modifier": 0.0
           },
           {
             "id": "cookie_pecan",
             "name": "Biscoito de Nozes",
-            "priceModifier": 0.0
+            "price_modifier": 0.0
           },
           {
             "id": "cookie_ginger",
             "name": "Biscoito de Gengibre",
-            "priceModifier": 0.0
+            "price_modifier": 0.0
           }
         ]
       }
@@ -903,12 +903,12 @@ const baskets: Product[] = [
     "sku": "BASKET005",
     "name": "Cesta de Pães Artesanais",
     "picture": "/produtos/cestas/paes-artesanais.png",
-    "basePrice": 60.0,
+    "base_price": 60.0,
     "description": "Cesta com seleção de pães artesanais variados.",
     "rating": 4.8,
     "unit": "uni",
-    "orderCount": 10,
-    "quantityGap": 1,
+    "order_count": 10,
+    "quantity_gap": 1,
     "categories": ["baskets"],
     "tags": ["pães artesanais", "fresco", "assados"],
     "customizations": []
@@ -918,12 +918,12 @@ const baskets: Product[] = [
     "sku": "BASKET006",
     "name": "Cesta de Café com Leite",
     "picture": "/produtos/cestas/cafe-com-leite.png",
-    "basePrice": 45.0,
+    "base_price": 45.0,
     "description": "Cesta ideal para o café da manhã, com café, leite e pães.",
     "rating": 4.6,
     "unit": "uni",
-    "orderCount": 12,
-    "quantityGap": 1,
+    "order_count": 12,
+    "quantity_gap": 1,
     "categories": ["baskets"],
     "tags": ["café", "leite", "café da manhã"],
     "customizations": [
@@ -931,17 +931,17 @@ const baskets: Product[] = [
         "id": "coffee_type",
         "name": "Escolha o tipo de café",
         "type": "single",
-        "isRequired": true,
+        "is_required": true,
         "options": [
           {
             "id": "coffee_espresso",
             "name": "Espresso",
-            "priceModifier": 0.0
+            "price_modifier": 0.0
           },
           {
             "id": "coffee_brewed",
             "name": "Café coado",
-            "priceModifier": 0.0
+            "price_modifier": 0.0
           }
         ]
       }
@@ -952,13 +952,13 @@ const baskets: Product[] = [
     "sku": "BASKET007",
     "name": "Cesta de Lanches",
     "picture": "/produtos/cestas/lanches.png",
-    "basePrice": 55.0,
-    "promotionPrice": 50.0,
+    "base_price": 55.0,
+    "promotion_price": 50.0,
     "description": "Cesta com snacks, pães e acompanhamentos.",
     "rating": 4.7,
     "unit": "uni",
-    "orderCount": 8,
-    "quantityGap": 1,
+    "order_count": 8,
+    "quantity_gap": 1,
     "tags": ["snacks", "lanches", "acompanhamentos", "promocional"],
     "categories": ["baskets", "promotions"],
     "customizations": []
@@ -968,12 +968,12 @@ const baskets: Product[] = [
     "sku": "BASKET008",
     "name": "Cesta de Natal",
     "picture": "/produtos/cestas/natal.png",
-    "basePrice": 150.0,
+    "base_price": 150.0,
     "description": "Cesta festiva com produtos especiais para as festas de fim de ano.",
     "rating": 4.9,
     "unit": "uni",
-    "orderCount": 5,
-    "quantityGap": 1,
+    "order_count": 5,
+    "quantity_gap": 1,
     "categories": ["baskets"],
     "tags": ["natal", "festivo", "especial"],
     "customizations": []
@@ -983,12 +983,12 @@ const baskets: Product[] = [
     "sku": "BASKET009",
     "name": "Cesta de Doces",
     "picture": "/produtos/cestas/doces.png",
-    "basePrice": 40.0,
+    "base_price": 40.0,
     "description": "Cesta recheada com diversos doces artesanais.",
     "rating": 4.6,
     "unit": "uni",
-    "orderCount": 6,
-    "quantityGap": 1,
+    "order_count": 6,
+    "quantity_gap": 1,
     "categories": ["baskets"],
     "tags": ["doces", "artesanal", "delicioso"],
     "customizations": []
@@ -998,12 +998,12 @@ const baskets: Product[] = [
     "sku": "BASKET010",
     "name": "Cesta Vegana",
     "picture": "/produtos/cestas/vegana.png",
-    "basePrice": 70.0,
+    "base_price": 70.0,
     "description": "Cesta com opções veganas, incluindo pães e snacks.",
     "rating": 4.7,
     "unit": "uni",
-    "orderCount": 7,
-    "quantityGap": 1,
+    "order_count": 7,
+    "quantity_gap": 1,
     "categories": ["baskets"],
     "tags": ["vegano", "pães", "snacks", "saudável"],
     "customizations": []
@@ -1016,13 +1016,13 @@ const donuts: Product[] = [
     "sku": "DONUT001",
     "name": "Donut Glaceado",
     "picture": "/produtos/donuts/glaceado.png",
-    "basePrice": 3.5,
-    "promotionPrice": 3.0,
+    "base_price": 3.5,
+    "promotion_price": 3.0,
     "description": "Donut clássico coberto com glacê doce.",
     "rating": 4.7,
     "unit": "uni",
-    "orderCount": 120,
-    "quantityGap": 1,
+    "order_count": 120,
+    "quantity_gap": 1,
     "tags": ["glacê", "clássico", "doce", "tradicional"],
     "categories": ["donuts", "promotions"],
     "customizations": []
@@ -1032,12 +1032,12 @@ const donuts: Product[] = [
     "sku": "DONUT002",
     "name": "Donut de Chocolate",
     "picture": "/produtos/donuts/chocolate.png",
-    "basePrice": 4.0,
+    "base_price": 4.0,
     "description": "Donut macio coberto com chocolate cremoso.",
     "rating": 4.9,
     "unit": "uni",
-    "orderCount": 100,
-    "quantityGap": 1,
+    "order_count": 100,
+    "quantity_gap": 1,
     "categories": ["donuts"],
     "tags": ["chocolate", "cremoso", "favorito"],
     "customizations": []
@@ -1047,12 +1047,12 @@ const donuts: Product[] = [
     "sku": "DONUT003",
     "name": "Donut de Morango",
     "picture": "/produtos/donuts/morango.png",
-    "basePrice": 4.5,
+    "base_price": 4.5,
     "description": "Donut recheado e coberto com geleia de morango.",
     "rating": 4.8,
     "unit": "uni",
-    "orderCount": 80,
-    "quantityGap": 1,
+    "order_count": 80,
+    "quantity_gap": 1,
     "categories": ["donuts"],
     "tags": ["morango", "geleia", "fruta", "recheado"],
     "customizations": [
@@ -1060,17 +1060,17 @@ const donuts: Product[] = [
         "id": "icing",
         "name": "Escolha a cobertura",
         "type": "single",
-        "isRequired": true,
+        "is_required": true,
         "options": [
           {
             "id": "icing_chocolate",
             "name": "Chocolate",
-            "priceModifier": 0.5
+            "price_modifier": 0.5
           },
           {
             "id": "icing_vanilla",
             "name": "Baunilha",
-            "priceModifier": 0.5
+            "price_modifier": 0.5
           }
         ]
       }
@@ -1081,13 +1081,13 @@ const donuts: Product[] = [
     "sku": "DONUT004",
     "name": "Donut de Caramelo",
     "picture": "/produtos/donuts/caramelo.png",
-    "basePrice": 4.0,
-    "promotionPrice": 3.5,
+    "base_price": 4.0,
+    "promotion_price": 3.5,
     "description": "Donut recheado com caramelo artesanal.",
     "rating": 4.6,
     "unit": "uni",
-    "orderCount": 70,
-    "quantityGap": 1,
+    "order_count": 70,
+    "quantity_gap": 1,
     "tags": ["caramelo", "artesanal", "doce", "recheado"],
     "categories": ["donuts", "promotions"],
     "customizations": []
@@ -1097,12 +1097,12 @@ const donuts: Product[] = [
     "sku": "DONUT005",
     "name": "Donut Vegano",
     "picture": "/produtos/donuts/vegano.png",
-    "basePrice": 5.0,
+    "base_price": 5.0,
     "description": "Donut sem ingredientes de origem animal, sabor baunilha.",
     "rating": 4.5,
     "unit": "uni",
-    "orderCount": 50,
-    "quantityGap": 1,
+    "order_count": 50,
+    "quantity_gap": 1,
     "categories": ["donuts"],
     "tags": ["vegano", "baunilha", "sem origem animal"],
     "customizations": []
@@ -1112,12 +1112,12 @@ const donuts: Product[] = [
     "sku": "DONUT006",
     "name": "Donut de Canela",
     "picture": "/produtos/donuts/canela.png",
-    "basePrice": 3.5,
+    "base_price": 3.5,
     "description": "Donut polvilhado com açúcar e canela.",
     "rating": 4.7,
     "unit": "uni",
-    "orderCount": 85,
-    "quantityGap": 1,
+    "order_count": 85,
+    "quantity_gap": 1,
     "categories": ["donuts"],
     "tags": ["canela", "açúcar", "clássico"],
     "customizations": []
@@ -1127,12 +1127,12 @@ const donuts: Product[] = [
     "sku": "DONUT007",
     "name": "Donut de Limão",
     "picture": "/produtos/donuts/limao.png",
-    "basePrice": 4.5,
+    "base_price": 4.5,
     "description": "Donut com cobertura azedinha de limão.",
     "rating": 4.4,
     "unit": "uni",
-    "orderCount": 60,
-    "quantityGap": 1,
+    "order_count": 60,
+    "quantity_gap": 1,
     "categories": ["donuts"],
     "tags": ["limão", "azedinho", "refrescante"],
     "customizations": []
@@ -1142,13 +1142,13 @@ const donuts: Product[] = [
     "sku": "DONUT008",
     "name": "Donut Oreo",
     "picture": "/produtos/donuts/oreo.png",
-    "basePrice": 5.5,
-    "promotionPrice": 4.5,
+    "base_price": 5.5,
+    "promotion_price": 4.5,
     "description": "Donut coberto com pedaços de Oreo e creme.",
     "rating": 4.8,
     "unit": "uni",
-    "orderCount": 40,
-    "quantityGap": 1,
+    "order_count": 40,
+    "quantity_gap": 1,
     "tags": ["oreo", "creme", "biscoito", "gourmet"],
     "categories": ["donuts", "promotions"],
     "customizations": []
@@ -1158,12 +1158,12 @@ const donuts: Product[] = [
     "sku": "DONUT009",
     "name": "Donut de Frutas Vermelhas",
     "picture": "/produtos/donuts/frutas-vermelhas.png",
-    "basePrice": 5.0,
+    "base_price": 5.0,
     "description": "Donut recheado com frutas vermelhas.",
     "rating": 4.9,
     "unit": "uni",
-    "orderCount": 45,
-    "quantityGap": 1,
+    "order_count": 45,
+    "quantity_gap": 1,
     "categories": ["donuts"],
     "tags": ["frutas vermelhas", "recheado", "fruta", "doce"],
     "customizations": []
@@ -1173,12 +1173,12 @@ const donuts: Product[] = [
     "sku": "DONUT010",
     "name": "Donut Matcha",
     "picture": "/produtos/donuts/matcha.png",
-    "basePrice": 6.0,
+    "base_price": 6.0,
     "description": "Donut com cobertura de chá verde matcha.",
     "rating": 4.6,
     "unit": "uni",
-    "orderCount": 30,
-    "quantityGap": 1,
+    "order_count": 30,
+    "quantity_gap": 1,
     "categories": ["donuts"],
     "tags": ["matcha", "chá verde", "especial", "gourmet"],
     "customizations": []
@@ -1188,12 +1188,12 @@ const donuts: Product[] = [
     "sku": "DONUT011",
     "name": "Donut Red Velvet",
     "picture": "/produtos/donuts/red-velvet.png",
-    "basePrice": 5.5,
+    "base_price": 5.5,
     "description": "Donut de massa vermelha com cobertura cremosa.",
     "rating": 4.7,
     "unit": "uni",
-    "orderCount": 35,
-    "quantityGap": 1,
+    "order_count": 35,
+    "quantity_gap": 1,
     "categories": ["donuts"],
     "tags": ["red velvet", "cremoso", "massa especial"],
     "customizations": []
@@ -1203,13 +1203,13 @@ const donuts: Product[] = [
     "sku": "DONUT012",
     "name": "Donut de Doce de Leite",
     "picture": "/produtos/donuts/doce-de-leite.png",
-    "basePrice": 4.5,
-    "promotionPrice": 4.0,
+    "base_price": 4.5,
+    "promotion_price": 4.0,
     "description": "Donut recheado com doce de leite caseiro.",
     "rating": 4.8,
     "unit": "uni",
-    "orderCount": 55,
-    "quantityGap": 1,
+    "order_count": 55,
+    "quantity_gap": 1,
     "tags": ["doce de leite", "caseiro", "recheado"],
     "categories": ["donuts", "promotions"],
     "customizations": []
@@ -1219,12 +1219,12 @@ const donuts: Product[] = [
     "sku": "DONUT013",
     "name": "Donut de Pistache",
     "picture": "/produtos/donuts/pistache.png",
-    "basePrice": 6.5,
+    "base_price": 6.5,
     "description": "Donut coberto com creme e pedaços de pistache.",
     "rating": 4.7,
     "unit": "uni",
-    "orderCount": 25,
-    "quantityGap": 1,
+    "order_count": 25,
+    "quantity_gap": 1,
     "categories": ["donuts"],
     "tags": ["pistache", "cremoso", "premium"],
     "customizations": []
@@ -1234,12 +1234,12 @@ const donuts: Product[] = [
     "sku": "DONUT014",
     "name": "Donut Gourmet",
     "picture": "/produtos/donuts/gourmet.png",
-    "basePrice": 7.0,
+    "base_price": 7.0,
     "description": "Donut premium com cobertura especial de Nutella.",
     "rating": 4.9,
     "unit": "uni",
-    "orderCount": 20,
-    "quantityGap": 1,
+    "order_count": 20,
+    "quantity_gap": 1,
     "categories": ["donuts"],
     "tags": ["nutella", "premium", "especial", "gourmet"],
     "customizations": []
@@ -1252,12 +1252,12 @@ const cookies: Product[] = [
     "sku": "COOKIE001",
     "name": "Cookie de Chocolate com Nozes",
     "picture": "/produtos/cookies/chocolate-com-nozes.png",
-    "basePrice": 4.0,
+    "base_price": 4.0,
     "description": "Cookie artesanal com pedaços de chocolate meio amargo e nozes crocantes.",
     "rating": 4.9,
     "unit": "uni",
-    "orderCount": 85,
-    "quantityGap": 1,
+    "order_count": 85,
+    "quantity_gap": 1,
     "categories": ["cookies"],
     "customizations": [],
     "tags": ["chocolate", "nozes", "artesanal", "crocante"]
@@ -1267,12 +1267,12 @@ const cookies: Product[] = [
     "sku": "COOKIE002",
     "name": "Cookie de Aveia com Mel",
     "picture": "/produtos/cookies/aveia-com-mel.png",
-    "basePrice": 3.5,
+    "base_price": 3.5,
     "description": "Um cookie macio e saudável, feito com aveia integral e um toque de mel.",
     "rating": 4.7,
     "unit": "uni",
-    "orderCount": 70,
-    "quantityGap": 1,
+    "order_count": 70,
+    "quantity_gap": 1,
     "categories": ["cookies"],
     "customizations": [],
     "tags": ["aveia", "mel", "saudável", "macio"]
@@ -1282,12 +1282,12 @@ const cookies: Product[] = [
     "sku": "COOKIE003",
     "name": "Cookie de Manteiga de Amendoim",
     "picture": "/produtos/cookies/manteiga-de-amendoim.png",
-    "basePrice": 4.5,
+    "base_price": 4.5,
     "description": "Delicioso cookie feito com manteiga de amendoim natural, ideal para os amantes desse sabor.",
     "rating": 4.8,
     "unit": "uni",
-    "orderCount": 65,
-    "quantityGap": 1,
+    "order_count": 65,
+    "quantity_gap": 1,
     "categories": ["cookies"],
     "customizations": [],
     "tags": ["manteiga de amendoim", "sabor intenso", "cremoso", "artesanal"]
@@ -1297,12 +1297,12 @@ const cookies: Product[] = [
     "sku": "COOKIE004",
     "name": "Cookie Red Velvet",
     "picture": "/produtos/cookies/red-velvet.png",
-    "basePrice": 5.0,
+    "base_price": 5.0,
     "description": "Cookie macio de red velvet com pedaços de chocolate branco.",
     "rating": 4.9,
     "unit": "uni",
-    "orderCount": 90,
-    "quantityGap": 1,
+    "order_count": 90,
+    "quantity_gap": 1,
     "categories": ["cookies"],
     "customizations": [],
     "tags": ["red velvet", "chocolate branco", "macio", "gourmet"]
@@ -1312,12 +1312,12 @@ const cookies: Product[] = [
     "sku": "COOKIE005",
     "name": "Cookie de Frutas Secas",
     "picture": "/produtos/cookies/frutas-secas.png",
-    "basePrice": 4.5,
+    "base_price": 4.5,
     "description": "Cookie recheado com uma mistura de frutas secas como uvas passas, damascos e cranberries.",
     "rating": 4.6,
     "unit": "uni",
-    "orderCount": 55,
-    "quantityGap": 1,
+    "order_count": 55,
+    "quantity_gap": 1,
     "categories": ["cookies"],
     "customizations": [],
     "tags": ["frutas secas", "damasco", "cranberry", "saudável"]

@@ -28,7 +28,7 @@ const CartItemCustomization = ({data, ...rest}: CartItemCustomizationProps) => {
     <Each data={customizations} render={customization => (
       <li>
         {customization?.options?.flatMap(o => (
-          `${o.name} ${o.priceModifier ? `+${formatCurrency(o.priceModifier)}` : ''}`
+          `${o.name} ${o.price_modifier ? `+${formatCurrency(o.price_modifier)}` : ''}`
         )).join(', ')}
       </li>
     )}/>

@@ -1,264 +1,176 @@
-import {ChangeEvent, useEffect, useState} from "react";
-import {useLocalStorage} from "usehooks-ts";
 import {useNavigate} from "react-router-dom";
 
-// Types
-import {Order} from "@modules/order/types";
-
-// DTOs
-import {createFromCart} from "@modules/order/data/dtos/OrderDto";
+// Services
+import OrderService from "@modules/order/data/services/OrderService/OrderService.ts";
 
 // Hooks
 import useCart from "@modules/cart/domain/hooks/useCart.ts";
+import useAuth from "@modules/authentication/domain/hooks/useAuth.ts";
 
 // Utils
 import {formatCurrency} from "@modules/product/domain/utils/money.ts";
 
 // Components
+import CreateAddress from "@modules/checkout/presentation/components/CreateAddress";
 import CartItemCard from "@modules/cart/presentation/components/CartItemCard";
 import Each from "@common/presentation/components/atoms/Each";
-import Input from "@common/presentation/components/atoms/Input";
 import Button from "@common/presentation/components/atoms/Button";
+import SelectList from "@modules/checkout/presentation/components/Select";
 
 // Styled components
 import {StyledCheckoutPageForm, StyledCheckoutPageReview} from "./CheckoutPage.styles";
+import {useMemo, useState} from "react";
+import {Address, Card} from "@modules/user/types";
+import AddressService from "@modules/user/data/services/AddressService";
+import CreateCard from "@modules/checkout/presentation/components/CreateCard/CreateCard.tsx";
+import {CreateCardForm} from "@modules/checkout/presentation/components/CreateCard/CreateCard.types.ts";
+import CardService from "@modules/user/data/services/CardService/CardService.ts";
 
 const CheckoutPage = () => {
-  const { state, clearCart } = useCart();
-  const [, setOrders] = useLocalStorage<Order[]>("orders", []);
+  // Hooks
+  const {identity} = useAuth();
+  const {state, clearCart} = useCart();
+
   const total = state.items.reduce((acc, item) => acc + item.amount, 0);
   const navigate = useNavigate();
 
-  const [form_data, setFormData] = useState({
-    card_number: "",
-    expiration_date: "",
-    cvv: "",
-    card_name: "",
-    cep: "",
-    address: "",
-    number: "",
-    complement: "",
-  });
+  // States
+  const [addresses, setAddresses] = useState<Address[]>(identity?.addresses ?? []);
+  const [cards, setCards] = useState<Card[]>(identity?.cards ?? []);
+  const [addressId, setAddressId] = useState<string>();
+  const [cardId, setCardId] = useState<string>();
+  const [addingNewAddress, setAddingNewAddress] = useState<boolean>(addresses.length == 0);
+  const [addingNewCard, setAddingNewCard] = useState<boolean>(cards.length == 0);
 
-  const [is_form_valid, setIsFormValid] = useState(false);
-  const [is_loading_address, setIsLoadingAddress] = useState(false);
-  const [cep_error, setCepError] = useState<string | null>(null);
+  const addressSelectItems = useMemo(() => (
+    addresses.flatMap(a => ({name: a.name, value: a.id, caption: a.mounted}))
+  ), [addresses]);
 
-  const validateForm = () => {
-    const {
-      card_number,
-      expiration_date,
-      cvv,
-      card_name,
-      cep,
-      address,
-      number,
-    } = form_data;
+  const cardSelectItems = useMemo(() => (
+    cards.flatMap(a => ({name: a.name, value: a.id, caption: a.number}))
+  ), [cards]);
 
-    const isCardNumberValid = /^[0-9]{4} [0-9]{4} [0-9]{4} [0-9]{4}$/.test(card_number);
-    const isExpirationDateValid = /^\d{4}-\d{2}$/.test(expiration_date);
-    const isCvvValid = /^[0-9]{3}$/.test(cvv);
-    const isCardNameValid = card_name.trim() !== "";
-    const isCepValid = /^\d{5}-\d{3}$/.test(cep);
-    const isAddressValid = address.trim() !== "";
-    const isNumberValid = number.trim() !== "";
+  const handleOnSelectAddress = (addressId: string) => {
+    setAddressId(() => addressId);
+  }
 
-    const isValid =
-      isCardNumberValid &&
-      isExpirationDateValid &&
-      isCvvValid &&
-      isCardNameValid &&
-      isCepValid &&
-      isAddressValid &&
-      isNumberValid;
+  const handleOnSelectCard = (cardId: string) => {
+    setCardId(() => cardId);
+  }
 
-    setIsFormValid(isValid);
-  };
+  const handleSetAddingNewAddress = () => {
+    setAddingNewAddress(true);
+  }
 
-  const handleInputChange = (e: ChangeEvent<HTMLInputElement>, field: string) => {
-    setFormData((prevData) => ({ ...prevData, [field]: e.target.value }));
-  };
+  const handleSetAddingNewCard = () => {
+    setAddingNewCard(true);
+  }
+
+  const handleAddNewAddress = (data: Omit<Address, 'id'>) => {
+    AddressService.create(data).then(address => {
+      setAddresses(prev => [...prev, address]);
+      setAddingNewAddress(false);
+      setAddressId(address.id);
+    });
+  }
+
+  const handleAddNewCard = (data: CreateCardForm) => {
+    CardService.create(data).then(card => {
+      setCards(prev => [...prev, card]);
+      setAddingNewCard(false);
+      setCardId(card.id);
+    });
+  }
 
   const handleFinishOrder = () => {
-    const order = createFromCart(state, {
-      address: form_data.address,
-      zip_code: form_data.cep,
-      number: form_data.number,
-      complement: form_data.complement,
-    });
+    if (addressId && cardId) {
+      const request = OrderService.create({
+        address_id: addressId,
+        card_id: cardId,
+        items: state.items.flatMap(item => ({
+          product_id: item.product.id,
+          quantity: item.quantity,
+          amount: item.amount,
+        }))
+      })
 
-    setOrders((prev) => [...prev, order]);
-    clearCart();
-    navigate(`/orders/${order.id}`);
-  };
-
-  useEffect(() => {
-    validateForm();
-  }, [form_data]);
-
-  useEffect(() => {
-    const fetchAddress = async () => {
-      if (!/^\d{5}-\d{3}$/.test(form_data.cep)) {
-        setCepError("CEP inválido.");
-        setFormData((prev) => ({ ...prev, address: "", complement: "" }));
-        return;
-      }
-
-      setIsLoadingAddress(true);
-      setCepError(null);
-
-      try {
-        const response = await fetch(`https://viacep.com.br/ws/${form_data.cep}/json/`);
-        const data = await response.json();
-
-        if (data.erro) {
-          setCepError("CEP não encontrado.");
-          setFormData((prev) => ({ ...prev, address: "", complement: "" }));
-        } else {
-          setFormData((prev) => ({
-            ...prev,
-            address: `${data.logradouro}, ${data.bairro}, ${data.localidade} - ${data.uf}`,
-            complement: data.complemento || "",
-          }));
-        }
-      } catch (error) {
-        setCepError("Erro ao buscar o CEP.");
-      } finally {
-        setIsLoadingAddress(false);
-      }
-    };
-
-    if (form_data.cep) {
-      fetchAddress();
+      request.then(response => {
+        clearCart();
+        navigate(`/orders/${response.id}`);
+      })
     }
-  }, [form_data.cep]);
+  };
 
   return (
     <div className="container py-4">
       <div className="row g-3">
         <div className="col-12 col-lg-8 d-flex flex-column gap-3">
-          <StyledCheckoutPageForm>
-            <div className="row g-2">
-              <div className="col-12">
-                <h5>Dados de pagamento</h5>
-              </div>
-              <div className="col-12">
-                <label className="d-flex flex-column w-100">
-                  <small>Número do cartão</small>
-                  <Input
-                    type="text"
-                    inputMode="numeric"
-                    placeholder="1234 5678 1234 5678"
-                    mask="9999 9999 9999 9999"
-                    value={form_data.card_number}
-                    onChange={(e) => handleInputChange(e, "card_number")}
-                  />
-                </label>
-              </div>
-              <div className="col-6">
-                <label className="d-flex flex-column w-100">
-                  <small>Data de validade</small>
-                  <Input
-                    type="month"
-                    placeholder="01/2030"
-                    value={form_data.expiration_date}
-                    onChange={(e) => handleInputChange(e, "expiration_date")}
-                  />
-                </label>
-              </div>
-              <div className="col-6">
-                <label className="d-flex flex-column w-100">
-                  <small>CVV</small>
-                  <Input
-                    type="text"
-                    inputMode="numeric"
-                    placeholder="123"
-                    mask="999"
-                    value={form_data.cvv}
-                    onChange={(e) => handleInputChange(e, "cvv")}
-                  />
-                </label>
-              </div>
-              <div className="col-12">
-                <label className="d-flex flex-column w-100">
-                  <small>Nome impresso no cartão</small>
-                  <Input
-                    type="text"
-                    placeholder="João da silva"
-                    value={form_data.card_name}
-                    onChange={(e) => handleInputChange(e, "card_name")}
-                  />
-                </label>
-              </div>
-            </div>
-          </StyledCheckoutPageForm>
+          <div className="row g-4">
 
-          <StyledCheckoutPageForm>
-            <div className="row g-2">
+            {addingNewCard ? (
               <div className="col-12">
-                <h5>Dados de entrega</h5>
+                <StyledCheckoutPageForm>
+                  <h5>Novo cartão</h5>
+                  <div className="row g-2">
+                    <div className="col-12">
+                      <CreateCard onCreate={handleAddNewCard}/>
+                    </div>
+                  </div>
+                </StyledCheckoutPageForm>
               </div>
-              <div className="col-12 col-lg-2">
-                <label className="d-flex flex-column w-100">
-                  <small>CEP</small>
-                  <Input
-                    type="text"
-                    inputMode="numeric"
-                    placeholder="12345-689"
-                    mask="99999-999"
-                    value={form_data.cep}
-                    onChange={(e) => handleInputChange(e, "cep")}
-                  />
-                </label>
-                {cep_error && <small className="text-danger">{cep_error}</small>}
+            ) : (
+              <div className="col-12 d-flex flex-column gap-2">
+                <h5>Forma de pagamento</h5>
+                <SelectList
+                  value={cardId}
+                  onChange={handleOnSelectCard}
+                  items={cardSelectItems}
+                />
+
+                <Button variant="ghost" className="w-100" onClick={handleSetAddingNewCard}>
+                  Adicionar cartão
+                </Button>
               </div>
-              <div className="col-12 col-lg-7">
-                <label className="d-flex flex-column w-100">
-                  <small>Endereço</small>
-                  <Input
-                    type="text"
-                    placeholder="Av. 8 de novembro"
-                    value={form_data.address}
-                    onChange={(e) => handleInputChange(e, "address")}
-                    disabled={is_loading_address}
-                  />
-                </label>
-              </div>
-              <div className="col-12 col-lg-3">
-                <label className="d-flex flex-column w-100">
-                  <small>Número</small>
-                  <Input
-                    type="text"
-                    placeholder="1234"
-                    value={form_data.number}
-                    onChange={(e) => handleInputChange(e, "number")}
-                  />
-                </label>
-              </div>
+            )}
+
+            {addingNewAddress ? (
               <div className="col-12">
-                <label className="d-flex flex-column w-100">
-                  <small>Complemento</small>
-                  <Input
-                    type="text"
-                    placeholder="Apto. 12"
-                    value={form_data.complement}
-                    onChange={(e) => handleInputChange(e, "complement")}
-                    disabled={is_loading_address}
-                  />
-                </label>
+                <StyledCheckoutPageForm>
+                  <h5>Novo endereço</h5>
+                  <div className="row g-2">
+                    <div className="col-12">
+                      <CreateAddress onCreate={handleAddNewAddress}/>
+                    </div>
+                  </div>
+                </StyledCheckoutPageForm>
               </div>
-            </div>
-          </StyledCheckoutPageForm>
+            ) : (
+              <div className="col-12 d-flex flex-column gap-2">
+                <h5>Endereço de entrega</h5>
+
+                <SelectList
+                  value={addressId}
+                  onChange={handleOnSelectAddress}
+                  items={addressSelectItems}
+                />
+
+                <Button variant="ghost" className="w-100" onClick={handleSetAddingNewAddress}>
+                  Adicionar endereço
+                </Button>
+              </div>
+            )}
+          </div>
         </div>
+
         <div className="col-12 col-lg-4 d-flex flex-column gap-3">
           <StyledCheckoutPageReview>
             <h6 className="px-3 pt-3">Resumo</h6>
-            <Each data={state.items} render={(item) => <CartItemCard data={item} />} />
+            <Each data={state.items} render={(item) => <CartItemCard data={item}/>}/>
             <div className="d-inline-flex justify-content-between px-3 py-2">
               <span className="fw-bold">Total:</span> {formatCurrency(total)}
             </div>
           </StyledCheckoutPageReview>
-          <Button className="w-100" onClick={handleFinishOrder} disabled={!is_form_valid}>
+          <Button className="w-100" onClick={handleFinishOrder} disabled={!addressId || !cardId}>
             Finalizar compra
           </Button>
         </div>

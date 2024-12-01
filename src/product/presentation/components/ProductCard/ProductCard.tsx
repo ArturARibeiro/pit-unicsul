@@ -11,12 +11,11 @@ import {
 } from "./ProductCard.styles";
 
 const ProductCard = ({product, variant, ...rest}: ProductCardProps) => {
-
   return (
     <StyledProductCard $variant={variant} {...rest}>
       <StyledProductCardPicture src={product.picture}/>
       <StyledProductCardName children={product.name}/>
-      <StyledProductCardPrice basePrice={product.basePrice} promotionPrice={product.promotionPrice}/>
+      <StyledProductCardPrice basePrice={product.base_price} promotionPrice={product.promotion_price}/>
       <StyledProductCardRating rating={product.rating}/>
     </StyledProductCard>
   )

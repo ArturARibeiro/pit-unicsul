@@ -1,3 +1,3 @@
 export interface RouteParams {
-  [key: string]: string;
+  [key: string]: string|undefined;
 }

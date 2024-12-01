@@ -1,10 +1,8 @@
-import {useNavigate} from "react-router-dom";
+import {useLoaderData, useNavigate} from "react-router-dom";
 
 // Types
 import type {Product} from "@modules/product/types";
-
-// Mocks
-import products from "@modules/product/data/mocks/products.ts";
+import type {LandingPageLoaderData} from "@modules/application/data/loaders/LandingPageLoader";
 
 // Components
 import Search from "@modules/application/presentation/components/Search";
@@ -20,11 +18,12 @@ import {
 } from "./LandingPage.styles";
 
 const LandingPage = () => {
+  const {products} = useLoaderData() as LandingPageLoaderData;
   const navigate = useNavigate();
 
-  const promotions = products.filter(p => p.promotionPrice).splice(0, 6);
+  const promotions = products.filter(p => p.promotion_price).splice(0, 6);
 
-  const favorites = products.sort((a, b) => b.orderCount - a.orderCount);
+  const favorites = products.sort((a, b) => b.order_count - a.order_count);
 
   const handleOpenProductPage = (product: Product) => {
     navigate(`/products/${product.id}`);

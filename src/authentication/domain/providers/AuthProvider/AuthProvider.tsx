@@ -1,44 +1,47 @@
-import {useLocalStorage} from "usehooks-ts";
+import {useEffect, useState} from "react";
 
 // Contexts
 import AuthContext from "@modules/authentication/domain/contexts/AuthContext";
 
+// Services
+import UserService from "@modules/user/data/services/UserService";
+import AuthService from "@modules/authentication/data/services/AuthService";
 
 // Types
+import type {User} from "@modules/user/types";
 import type {AuthProviderProps} from "./AuthProvider.types";
-import type {User} from "@modules/authentication/types";
 
 const AuthProvider = (props: AuthProviderProps) => {
-  const [users, setUsers] = useLocalStorage<User[]>('users', [])
-  const [identity, setIdentity] = useLocalStorage<User | null>('identity', null);
+  const [identity, setIdentity] = useState<User | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
   const check = !!identity;
 
   const logout = () => {
-    setIdentity(null);
+    AuthService.logout().then(() => {
+      setIdentity(null);
+    });
   }
 
-  const login = (email: string, password: string): boolean => {
-    const user = users.find(user => user.email === email && password === password);
-    setIdentity(user ?? null);
-    return Boolean(user);
+  const login = (intendedUrl: string = '/'): void => {
+    const redirect = `${location.protocol}//${(`${location.host}/${intendedUrl}`).replace('//', '/')}`;
+    window.location.href = `${import.meta.env.VITE_BACKEND_URL}/sid?redirect=${redirect}`;
   }
 
-  const register = (data: User) => {
-    const exists = users.some(user => user.email === data.email);
+  useEffect(() => {
+    const request = UserService.find('me');
 
-    if (!exists) {
-      setUsers(users => {
-        return [...users, data];
-      })
+    request.then(user => {
+      setIdentity(user);
+    })
 
-      setIdentity(data);
-      return true
-    }
+    request.finally(() => {
+      setLoading(false);
+    })
+  }, []);
 
-    return false;
-  }
-
-  return <AuthContext.Provider value={{identity, check, login, logout, register}} {...props}/>
+  return !loading && (
+    <AuthContext.Provider value={{identity, check, login, logout}} {...props}/>
+  )
 }
 
 export default AuthProvider;

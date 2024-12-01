@@ -1,11 +1,9 @@
-import {useLocalStorage} from "usehooks-ts";
-import {useNavigate} from "react-router-dom";
+import {useLoaderData, useNavigate} from "react-router-dom";
 
 // Types
 import type {Order} from "@modules/order/types";
 
 // Mocks
-import products from "@modules/product/data/mocks/products.ts";
 
 // Components
 import Each from "@common/presentation/components/atoms/Each";
@@ -14,7 +12,7 @@ import Each from "@common/presentation/components/atoms/Each";
 import {StyledOrderListPageGallery} from "./OrderListPage.styles";
 
 const OrderListPage = () => {
-  const [orders] = useLocalStorage<Order[]>('orders', [])
+  const orders = useLoaderData() as Order[];
   const navigate = useNavigate();
   const statuses = {
     pending: "Pendente",
@@ -46,16 +44,14 @@ const OrderListPage = () => {
               <li className="list-group-item list-group-item-action d-flex gap-3" onClick={() => handleGoToOrderPage(order)}>
                 <StyledOrderListPageGallery>
                   <Each data={order.items} render={item => {
-                    const product = products.find(p => p.id === item.product_id);
-                    return <img src={product?.picture} alt={product?.name}/>
+                    return <img src={item.product?.picture} alt={item.product.name}/>
                   }}/>
                 </StyledOrderListPageGallery>
                 <div className="d-flex flex-column gap-1">
                   <h6 className="m-0">{statuses[order.status]}</h6>
                   <ul className="ps-3">
                     <Each data={order.items} render={item => {
-                      const product = products.find(p => p.id === item.product_id);
-                      return <li>{product?.name}</li>
+                      return <li>{item.product.name}</li>
                     }}/>
                   </ul>
                 </div>
@@ -73,16 +69,14 @@ const OrderListPage = () => {
               <li className="list-group-item list-group-item-action d-flex gap-3" onClick={() => handleGoToOrderPage(order)}>
                 <StyledOrderListPageGallery>
                   <Each data={order.items} render={item => {
-                    const product = products.find(p => p.id === item.product_id);
-                    return <img src={product?.picture} alt={product?.name}/>
+                    return <img src={item.product.picture} alt={item.product.name}/>
                   }}/>
                 </StyledOrderListPageGallery>
                 <div className="d-flex flex-column gap-1">
                   <h6 className="m-0">{statuses[order.status]}</h6>
                   <ul className="ps-3">
                     <Each data={order.items} render={item => {
-                      const product = products.find(p => p.id === item.product_id);
-                      return <li>{product?.name}</li>
+                      return <li>{item.product.name}</li>
                     }}/>
                   </ul>
                 </div>

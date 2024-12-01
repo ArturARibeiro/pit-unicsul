@@ -11,7 +11,6 @@ import MainLayout from "@common/presentation/layouts/MainLayout";
 
 // Pages
 const LoginPage = lazy(() => import('@modules/authentication/presentation/pages/LoginPage'));
-const RegisterPage = lazy(() => import('@modules/authentication/presentation/pages/RegisterPage'));
 const ProfilePage = lazy(() => import('@modules/authentication/presentation/pages/ProfilePage'));
 
 const AuthenticationModule: Module = {
@@ -21,10 +20,6 @@ const AuthenticationModule: Module = {
     {
       path: '/login',
       Component: withSuspense(LoginPage),
-    },
-    {
-      path: '/register',
-      Component: withSuspense(RegisterPage),
     },
     {
       path: '/profile',

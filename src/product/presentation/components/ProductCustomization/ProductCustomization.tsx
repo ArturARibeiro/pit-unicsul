@@ -26,7 +26,7 @@ const ProductCustomization = ({customization, onChange}: ProductCustomizationPro
       const isMultiple = customization.type === 'multiple';
       const selectedOptions = prev.options;
       const optionExists = selectedOptions.some(opt => opt.optionId === optionId);
-      const maxSelections = customization.maxSelections ?? Infinity;
+      const maxSelections = customization.max_selections ?? Infinity;
 
       if (isMultiple) {
         if (optionExists) {
@@ -54,7 +54,7 @@ const ProductCustomization = ({customization, onChange}: ProductCustomizationPro
     <StyledProductCustomization>
       <StyledProductCustomizationName>
         {customization.name}
-        {customization.isRequired && <small>Obrigatório</small>}
+        {customization.is_required && <small>Obrigatório</small>}
       </StyledProductCustomizationName>
 
       <StyledProductCustomizationList>
@@ -64,12 +64,12 @@ const ProductCustomization = ({customization, onChange}: ProductCustomizationPro
             <ProductCustomizationOption
               option={option}
               multiple={customization.type === "multiple"}
-              required={customization.isRequired}
+              required={customization.is_required}
               checked={cartCustomization.options.some((opt) => opt.optionId === option.id)}
               onChange={() => handleSelectOption(option.id)}
               disabled={
                 customization.type === "multiple" &&
-                cartCustomization.options.length >= (customization.maxSelections ?? Infinity) &&
+                cartCustomization.options.length >= (customization.max_selections ?? Infinity) &&
                 !cartCustomization.options.some((opt) => opt.optionId === option.id)
               }
             />

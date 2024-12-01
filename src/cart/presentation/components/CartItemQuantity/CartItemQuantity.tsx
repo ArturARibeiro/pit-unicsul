@@ -16,7 +16,7 @@ const CartItemQuantity = ({data, onIncrement, onDecrement, onRemove}: CartItemQu
   }
 
   const handleDecrementQuantity = () => {
-    if (data.quantity <= data.product.quantityGap) {
+    if (data.quantity <= data.product.quantity_gap) {
       handleRemoveItemFromCart();
     } else {
       onDecrement?.()
@@ -29,7 +29,7 @@ const CartItemQuantity = ({data, onIncrement, onDecrement, onRemove}: CartItemQu
 
   return <StyledCartItemQuantity>
     <StyledCartItemQuantityButton variant="outline" onClick={handleDecrementQuantity}>
-      {data.quantity == data.product.quantityGap ? (
+      {data.quantity == data.product.quantity_gap ? (
         <i className="bi bi-x"></i>
       ) : (
         <i className="bi bi-dash"></i>

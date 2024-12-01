@@ -1,15 +1,15 @@
-import {ScrollRestoration, useNavigate, useParams} from "react-router-dom";
+import {ScrollRestoration, useLoaderData, useNavigate} from "react-router-dom";
 import {useCallback, useEffect, useReducer, useState} from "react";
 
 // Types
-import type {ProductPageRouteParams} from "./ProductPage.types.ts";
 import type {CartCustomization} from "@modules/cart/types";
+import type {ProductPageLoaderData} from "@modules/product/data/loaders/ProductPageLoader";
 
 // Hooks
 import useCart from "@modules/cart/domain/hooks/useCart.ts";
 
 // DTOs
-import {createFromProductId} from "@modules/cart/data/dtos/CartItemDto";
+import {createFromProduct} from "@modules/cart/data/dtos/CartItemDto";
 
 // Reducers
 import CartItemReducer from "@modules/cart/domain/reducers/CartItemReducer";
@@ -36,11 +36,11 @@ import {
 } from "./ProductPage.styles";
 
 const ProductPage = () => {
-  const { product_id } = useParams<ProductPageRouteParams>();
-  const [cartItem, cartItemAction] = useReducer(CartItemReducer, createFromProductId(product_id!));
-  const [valid, setValid] = useState<boolean>(false);
-  const { addItem } = useCart();
   const navigate = useNavigate();
+  const { addItem } = useCart();
+  const { product } = useLoaderData() as ProductPageLoaderData;
+  const [cartItem, cartItemAction] = useReducer(CartItemReducer, createFromProduct(product));
+  const [valid, setValid] = useState<boolean>(false);
 
   const handleIncrementQuantity = () => {
     cartItemAction({ type: "INCREMENT_QUANTITY" });
@@ -84,7 +84,7 @@ const ProductPage = () => {
   useEffect(() => {
     setValid(() => (
       !cartItem.product.customizations.some((customization) => (
-        customization.isRequired &&
+        customization.is_required &&
         !cartItem.selectedCustomizations.some(
           selected => selected.customizationId === customization.id && selected.options.length
         )
@@ -114,8 +114,8 @@ const ProductPage = () => {
             <StyledProductPageName>{cartItem.product.name}</StyledProductPageName>
             <StyledProductPageDescription>{cartItem.product.description}</StyledProductPageDescription>
             <ProductPrice
-              basePrice={cartItem.product.basePrice}
-              promotionPrice={cartItem.product.promotionPrice}
+              basePrice={cartItem.product.base_price}
+              promotionPrice={cartItem.product.promotion_price}
             />
           </StyledProductPageInfo>
 

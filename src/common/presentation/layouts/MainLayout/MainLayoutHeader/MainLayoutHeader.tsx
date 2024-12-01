@@ -1,4 +1,5 @@
 import {useNavigate} from "react-router-dom";
+import {useEffect, useState} from "react";
 
 // Types
 import type {Order} from "@modules/order/types";
@@ -6,7 +7,9 @@ import type {Order} from "@modules/order/types";
 // Hooks
 import useCart from "@modules/cart/domain/hooks/useCart.ts";
 import useAuth from "@modules/authentication/domain/hooks/useAuth.ts";
-import {useLocalStorage} from "usehooks-ts";
+
+// Services
+import OrderService from "@modules/order/data/services/OrderService";
 
 // Styled Components
 import {
@@ -20,7 +23,7 @@ import {
 } from "./MainLayoutHeader.styles";
 
 const MainLayoutHeader = () => {
-  const [orders] = useLocalStorage<Order[]>('orders', []);
+  const [orders, setOrders] = useState<Order[]>([]);
   const {state} = useCart();
   const auth = useAuth();
   const navigate = useNavigate();
@@ -36,6 +39,12 @@ const MainLayoutHeader = () => {
   const handleNavigateToOrdersPage = () => {
     return navigate('/orders');
   }
+
+  useEffect(() => {
+    if (auth.check) {
+      OrderService.getAll().then(setOrders);
+    }
+  }, [auth.check]);
 
   return (
     <StyledMainLayoutHeader>

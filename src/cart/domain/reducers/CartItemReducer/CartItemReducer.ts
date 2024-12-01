@@ -15,17 +15,17 @@ const updateCustomizations = (customizations: CartCustomization[], newCustomizat
 }
 
 const calculateAmount = (
-  { basePrice, promotionPrice, customizations }: Product,
+  { base_price, promotion_price, customizations }: Product,
   quantity: number,
   cartCustomizations: CartCustomization[] = []
 ): number => {
-  const base = promotionPrice ?? basePrice;
+  const base = promotion_price ?? base_price;
   const customizationCost = cartCustomizations.reduce((total, { customizationId, options }) => {
     const customization = customizations.find((c) => c.id === customizationId);
     const optionTotal = customization
       ? options.reduce((sum, { optionId }) => {
         const option = customization.options.find((o) => o.id === optionId);
-        return sum + (option?.priceModifier ?? 0);
+        return sum + (option?.price_modifier ?? 0);
       }, 0)
       : 0;
     return total + optionTotal;
@@ -38,12 +38,12 @@ const cartItemReducer = (state: CartItem, action: CartItemAction): CartItem => {
 
   switch (action.type) {
     case "INCREMENT_QUANTITY": {
-      const newQuantity = quantity + product.quantityGap;
+      const newQuantity = quantity + product.quantity_gap;
       const newAmount = calculateAmount(product, newQuantity, selectedCustomizations);
       return { ...state, quantity: newQuantity, amount: newAmount };
     }
     case "DECREMENT_QUANTITY": {
-      const newQuantity = Math.max(quantity - product.quantityGap, product.quantityGap);
+      const newQuantity = Math.max(quantity - product.quantity_gap, product.quantity_gap);
       const newAmount = calculateAmount(product, newQuantity, selectedCustomizations);
       return { ...state, quantity: newQuantity, amount: newAmount };
     }

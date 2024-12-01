@@ -6,8 +6,8 @@ import AuthProvider from "@modules/authentication/domain/providers/AuthProvider"
 import CartProvider from "@modules/cart/domain/providers/CartProvider";
 
 const providers: ModuleProvider[] = [
-  NotificationProvider,
   AuthProvider,
+  NotificationProvider,
   CartProvider,
 ]
 

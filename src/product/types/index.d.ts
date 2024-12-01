@@ -1,4 +1,5 @@
 export type ProductCategory = {
+  id: string;
   slug: string;
   name: string;
   image: string;
@@ -9,13 +10,13 @@ export type Product = {
   sku: string;
   name: string;
   picture?: string;
-  basePrice: number;
-  promotionPrice?: number;
+  base_price: number;
+  promotion_price?: number;
   description: string;
   rating: number;
   unit: 'uni' | 'kg' | 'g';
-  orderCount: number;
-  quantityGap: number;
+  order_count: number;
+  quantity_gap: number;
   tags: string[];
   categories: ProductCategory['slug'][];
   customizations: ProductCustomization[];
@@ -25,13 +26,13 @@ export type ProductCustomization = {
   id: string; // UUIDv4
   name: string;
   type: 'single' | 'multiple';
-  isRequired: boolean;
-  maxSelections?: number;
+  is_required: boolean;
+  max_selections?: number;
   options: ProductCustomizationOption[];
 };
 
 export type ProductCustomizationOption = {
   id: string; // UUIDv4
   name: string;
-  priceModifier: number;
+  price_modifier: number;
 };

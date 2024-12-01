@@ -4,7 +4,7 @@ import {Product} from "@modules/product/types";
 export const calculateProductTotal = (product: Product, selectedOptions: CartCustomizationOption[]): number => {
   if (!product || !product.customizations) return 0;
 
-  const price = product.promotionPrice || product.basePrice;
+  const price = product.promotion_price || product.base_price;
 
   return price + selectedOptions.reduce((total, option) => {
     const customization = product.customizations.find(custom =>
@@ -13,7 +13,7 @@ export const calculateProductTotal = (product: Product, selectedOptions: CartCus
 
     if (customization) {
       const selectedOption = customization.options.find(opt => opt.id === option.optionId);
-      return total + (selectedOption?.priceModifier || 0);
+      return total + (selectedOption?.price_modifier || 0);
     }
 
     return total;

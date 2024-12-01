@@ -10,7 +10,7 @@ import {StyledCartItemBasePrice, StyledCartItemPrice, StyledCartItemPromotionPri
 const CartItemPrice = ({data, ...rest}: CartItemPriceProps) => {
   return (
     <StyledCartItemPrice {...rest}>
-      {data.product.promotionPrice && (
+      {data.product.promotion_price && (
         <StyledCartItemPromotionPrice children={formatCurrency(data.amount)}/>
       )}
 

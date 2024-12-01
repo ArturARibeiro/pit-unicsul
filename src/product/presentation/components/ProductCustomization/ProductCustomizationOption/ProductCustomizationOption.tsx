@@ -25,8 +25,8 @@ const ProductCustomizationOption = ({ option, multiple, onChange, checked, ...re
     <StyledProductCustomizationOption>
       <StyledProductCustomizationOptionLabel htmlFor={`option-${option.id}`}>
         <StyledProductCustomizationOptionName children={option.name} />
-        {option.priceModifier !== 0 && (
-          <StyledProductCustomizationOptionPrice children={formatCurrency(option.priceModifier)} />
+        {option.price_modifier !== 0 && (
+          <StyledProductCustomizationOptionPrice children={formatCurrency(option.price_modifier)} />
         )}
       </StyledProductCustomizationOptionLabel>
 

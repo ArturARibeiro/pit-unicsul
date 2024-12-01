@@ -1,18 +1,27 @@
 // Types
 import type {Product} from "@modules/product/types";
 
-// Mocks
-import products from "@modules/product/data/mocks/products.ts";
+// Services
+import ApiService from "@common/data/services/ApiService";
 
-export const getAll = (): Promise<Product[]> => {
-  return new Promise(resolve => {
-    resolve(products);
-  })
-}
+export default {
+  getAll: (query?: Record<string, string>): Promise<Product[]> => {
+    return new Promise(resolve => {
+      const params = new URLSearchParams(query);
+      const request = ApiService.get<Product[]>(`/api/products?${params}`);
 
-export const find = (productId: Product['id']): Promise<Product | null> => {
-  return new Promise(resolve => {
-    const product = products.find(product => product.id == productId);
-    resolve(product ?? null);
-  })
+      request.then(response => {
+        resolve(response.data);
+      });
+    })
+  },
+  find: (productId: Product['id']): Promise<Product | null> => {
+    return new Promise(resolve => {
+      const request = ApiService.get<Product>(`/api/products/${productId}`);
+
+      request.then(response => {
+        resolve(response.data ?? null);
+      })
+    })
+  }
 }

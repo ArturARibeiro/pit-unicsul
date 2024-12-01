@@ -1,15 +1,15 @@
-import {ChangeEvent, KeyboardEvent, useState} from "react";
+import {ChangeEvent, KeyboardEvent, useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
 
 // Types
 import type {SearchProps} from "./Search.types";
 import type {Product} from "@modules/product/types";
 
-// Mocks
-import products from "@modules/product/data/mocks/products.ts";
-
 // Components
 import Each from "@common/presentation/components/atoms/Each";
+
+// Services
+import ProductService from "@modules/product/data/services/ProductService";
 
 // Styled components
 import {
@@ -26,6 +26,8 @@ import {
 const Search = ({onChange, ...rest}: SearchProps) => {
   const [value, setValue] = useState<string>('');
   const navigate = useNavigate();
+  const [products, setProducts] = useState<Product[]>([]);
+
   const filtered = products.filter(product => {
     return product.name.toLowerCase().includes(value.toLowerCase());
   }).splice(0, 4);
@@ -47,6 +49,10 @@ const Search = ({onChange, ...rest}: SearchProps) => {
     }
   }
 
+  useEffect(() => {
+    ProductService.getAll().then(setProducts);
+  }, []);
+
   return (
     <StyledSearchLabel>
       <i className="bi bi-search"></i>
@@ -61,8 +67,8 @@ const Search = ({onChange, ...rest}: SearchProps) => {
                   <StyledSearchListItemPicture src={product.picture}/>
                   <StyledSearchListItemName children={product.name}/>
                   <StyledSearchListItemPrice
-                    basePrice={product.basePrice}
-                    promotionPrice={product.promotionPrice}
+                    basePrice={product.base_price}
+                    promotionPrice={product.promotion_price}
                   />
                 </StyledSearchListItem>
               )}/>

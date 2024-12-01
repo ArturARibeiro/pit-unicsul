@@ -8,7 +8,6 @@ import {formatCurrency} from "@modules/product/domain/utils/money";
 import {StyledProductBasePrice, StyledProductPrice, StyledProductPromotionPrice} from "./ProductPrice.styles";
 
 const ProductPrice = ({basePrice, promotionPrice, currencySymbol, times = 1, ...rest}: ProductPriceProps) => {
-
   return (
     <StyledProductPrice {...rest}>
       {promotionPrice && (

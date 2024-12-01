@@ -1,9 +1,8 @@
-import type {User} from "@modules/authentication/types";
+import type {User} from "@modules/user/types";
 
 export interface AuthContextData {
   identity?: User | null;
   check: boolean;
   logout: () => void;
-  register: (user: User) => boolean;
-  login: (email: string, password: string) => boolean;
+  login: (intendedUrl?: string) => void;
 }

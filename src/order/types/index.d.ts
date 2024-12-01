@@ -1,25 +1,22 @@
 import type {Product} from "@modules/product/types";
+import type {Address, Card} from "@modules/user/types";
+
+export type OrderStatus = 'pending' | 'preparing' | 'transport' | 'concluded' | 'canceled';
 
 export type Order = {
   id: string; // UUID V4
   date: string;
-  status: 'pending' | 'preparing' | 'transport' | 'concluded' | 'canceled';
-  address: Address;
-  items: OrderItem[];
+  status: OrderStatus;
   review?: string;
   rate?: number;
-}
-
-export type Address = {
-  zip_code: string;
-  address: string;
-  number: string;
-  complement: string;
+  card: Card;
+  address: Address;
+  items: OrderItem[];
 }
 
 export type OrderItem = {
   id: string;
-  product_id: Product['id'];
   quantity: number;
-  price: number;
+  amount: number;
+  product: Product;
 }

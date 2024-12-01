@@ -7,8 +7,8 @@ import type {CartItem} from "@modules/cart/types";
 export const createFromCartItem = (cartItem: CartItem): OrderItem => {
   return {
     id: uuid(),
-    product_id: cartItem.product.id,
-    price: cartItem.product.promotionPrice ?? cartItem.product.basePrice,
+    product: cartItem.product,
+    amount: (cartItem.product.promotion_price ?? cartItem.product.base_price) * cartItem.quantity,
     quantity: cartItem.quantity,
   }
 }

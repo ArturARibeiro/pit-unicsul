@@ -1,9 +1,7 @@
 import {useEffect, useState} from "react";
-import {useParams} from "react-router-dom";
-import {useLocalStorage} from "usehooks-ts";
+import {useLoaderData} from "react-router-dom";
 
 // Types
-import type {OrderPageParams} from "./OrderPage.types";
 import type {Order} from "@modules/order/types";
 
 // Components
@@ -15,12 +13,13 @@ import Button from "@common/presentation/components/atoms/Button";
 import Textarea from "@common/presentation/components/atoms/Textarea";
 import OrderRate from "@modules/order/presentation/components/OrderRate";
 import useNotification from "@modules/notification/domain/hooks/useNotification.ts";
+import OrderService from "@modules/order/data/services/OrderService";
 
 const OrderPage = () => {
-  const {order_id} = useParams<OrderPageParams>();
+  const order = useLoaderData() as Order;
+  const [currentOrder, setCurrentOrder] = useState<Order>(order);
+
   const {dispatchNotification} = useNotification();
-  const [orders, setOrders] = useLocalStorage<Order[]>('orders', []);
-  const [currentOrder, setCurrentOrder] = useState<Order | null>(null);
   const [review, setReview] = useState<string>('');
   const [rate, setRate] = useState<number>(5);
 
@@ -32,38 +31,11 @@ const OrderPage = () => {
     canceled: 'Cancelado',
   };
 
-  useEffect(() => {
-    const order = orders.find(o => o.id === order_id);
-    if (order) {
-      setCurrentOrder(order);
-    }
-  }, [orders, order_id]);
-
-  useEffect(() => {
-    if (!currentOrder) return;
-
-    if (currentOrder.status === "pending") {
-      const pendingTimeout = setTimeout(() => {
-        updateOrderStatus("preparing");
-      }, 5000);
-
-      return () => clearTimeout(pendingTimeout);
-    }
-
-    if (currentOrder.status === "preparing") {
-      const preparingTimeout = setTimeout(() => {
-        updateOrderStatus("transport");
-      }, 10000);
-
-      return () => clearTimeout(preparingTimeout);
-    }
-  }, [currentOrder]);
-
   const updateOrderStatus = (newStatus: Order['status']) => {
     if (!currentOrder) return;
 
     const validTransitions: Record<string, Order['status'][]> = {
-      pending: ["preparing", "canceled"],
+      pending: ["canceled"],
       preparing: ["transport"],
       transport: ["concluded"],
     };
@@ -80,34 +52,40 @@ const OrderPage = () => {
       }
 
       setCurrentOrder(updatedOrder);
-      setOrders(prev =>
-        prev.map(o => (o.id === currentOrder.id ? updatedOrder : o))
-      );
     }
   };
 
   const handleCancelOrder = () => {
-    updateOrderStatus("canceled");
+    OrderService.cancel(currentOrder.id).then(() => {
+      updateOrderStatus("canceled");
+    })
   }
 
   const handleFinishOrder = () => {
-    updateOrderStatus("concluded");
+    OrderService.finish(currentOrder.id).then(() => {
+      updateOrderStatus("concluded");
+    })
   }
 
   const handleRateOrder = () => {
-    console.log(review, rate);
-    setOrders(prev => {
-      return [...prev].map(o => {
-        if (o.id === order_id) {
-          const newOrder = {...o, rate, review};
-          setCurrentOrder(newOrder);
-          return newOrder;
-        }
-
-        return o;
-      });
-    })
+    OrderService.rate(currentOrder.id, rate, review).then(order => {
+      setCurrentOrder(order);
+    });
   }
+
+  useEffect(() => {
+    const onUpdateOrder = ({detail}: {detail: Partial<Order>}) => {
+      if (detail.id == currentOrder.id) {
+        setCurrentOrder(prev => ({...prev, ...detail}));
+      }
+    }
+
+    window.addEventListener('sse:order:updated', onUpdateOrder);
+
+    return () => {
+      window.removeEventListener('sse:order:updated', onUpdateOrder);
+    }
+  }, [currentOrder.id]);
 
   return currentOrder && (
     <div className="container py-3">
@@ -126,10 +104,16 @@ const OrderPage = () => {
               <h5>Dados do pedido</h5>
               <ul className="list-group">
                 <li className="list-group-item">
-                  Valor total: {formatCurrency(currentOrder.items.reduce((a, b) => a + (b.price * b.quantity), 0))}
+                  <h6>Valor final</h6>
+                  {formatCurrency(currentOrder.items.reduce((a, b) => a + (b.amount ?? 0), 0))}
                 </li>
                 <li className="list-group-item">
-                  Endereço: {currentOrder.address.address}
+                  <h6>Endereço de entrega</h6>
+                  {currentOrder?.address?.mounted}
+                </li>
+                <li className="list-group-item">
+                  <h6>Dados de pagamento</h6>
+                  {currentOrder.card.number}
                 </li>
               </ul>
             </div>
